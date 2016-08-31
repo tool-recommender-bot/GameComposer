@@ -24,4 +24,6 @@ public interface BehaviorTemplate<T extends Behavior> {
     Map<String,Object> serialize();
 
     GameObject getOwner();
+
+    String getType();
 }

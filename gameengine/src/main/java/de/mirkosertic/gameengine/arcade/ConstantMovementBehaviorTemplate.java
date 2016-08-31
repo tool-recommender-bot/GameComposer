@@ -29,6 +29,9 @@ import java.util.Map;
 
 public class ConstantMovementBehaviorTemplate implements BehaviorTemplate<ConstantMovementBehavior>, ConstantMovement, Reflectable<ConstantMovementClassInformation> {
 
+    public static final String TYPE = "ConstantMovementBehaviorTemplate";
+
+    private static final String TYPE_ATTRIBUTE = "type";
     private static final ConstantMovementClassInformation CIINSTANCE = new ConstantMovementClassInformation();
 
     private final Property<Speed> speed;
@@ -71,7 +74,7 @@ public class ConstantMovementBehaviorTemplate implements BehaviorTemplate<Consta
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> theResult = new HashMap<>();
-        theResult.put(ConstantMovementBehavior.TYPE_ATTRIBUTE, ConstantMovementBehavior.TYPE);
+        theResult.put(TYPE_ATTRIBUTE, ConstantMovementBehavior.TYPE);
         theResult.put(SPEED_PROPERTY, speed.get().serialize());
         theResult.put(ROTATIONSPEED_PROPERTY, rotationSpeed.get().serialize());
         return theResult;
@@ -80,6 +83,11 @@ public class ConstantMovementBehaviorTemplate implements BehaviorTemplate<Consta
     @Override
     public void delete() {
         owner.getGameScene().removeBehaviorFrom(owner, this);
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
     public static ConstantMovementBehaviorTemplate deserialize(GameEventManager aEventmanager, GameObject aOwner, Map<String, Object> aSerializedData) {

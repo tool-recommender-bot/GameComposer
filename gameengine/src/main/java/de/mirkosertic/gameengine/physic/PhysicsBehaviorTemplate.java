@@ -28,6 +28,8 @@ import java.util.Map;
 
 public class PhysicsBehaviorTemplate implements BehaviorTemplate<PhysicsBehavior>, Physics, Reflectable<PhysicsClassInformation> {
 
+    public static final String TYPE = "PhysicsBehaviorTemplate";
+
     private static final PhysicsClassInformation CIINSTANCE = new PhysicsClassInformation();
 
     private final GameObject owner;
@@ -96,9 +98,14 @@ public class PhysicsBehaviorTemplate implements BehaviorTemplate<PhysicsBehavior
     }
 
     @Override
+    public String getType() {
+        return TYPE;
+    }
+
+    @Override
     public Map<String, Object> serialize() {
         Map<String, Object> theResult = new HashMap<>();
-        theResult.put(PhysicsBehavior.TYPE_ATTRIBUTE, PhysicsBehavior.TYPE);
+        theResult.put(TYPE_ATTRIBUTE, PhysicsBehavior.TYPE);
         theResult.put(ACTIVE_PROPERTY, Boolean.toString(active.get()));
         theResult.put("fixedrotation", Boolean.toString(fixedRotation.get()));
         theResult.put(DENSITY_PROPERTY, Float.toString(density.get()));

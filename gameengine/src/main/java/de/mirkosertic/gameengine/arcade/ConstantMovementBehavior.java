@@ -33,7 +33,9 @@ public class ConstantMovementBehavior implements Behavior, ConstantMovement, Ref
 
     private static final ConstantMovementClassInformation CIINSTANCE = new ConstantMovementClassInformation();
 
-    static final String TYPE = "ConstantMovement";
+    public static final String TYPE = "ConstantMovement";
+
+    private static final String TYPE_ATTRIBUTE = "type";
 
     private final GameObjectInstance objectInstance;
 
@@ -43,7 +45,8 @@ public class ConstantMovementBehavior implements Behavior, ConstantMovement, Ref
     private boolean remoteObject;
 
     ConstantMovementBehavior(GameObjectInstance aObjectInstance) {
-        this(aObjectInstance, aObjectInstance.getOwnerGameObject().getBehaviorTemplate(ConstantMovementBehaviorTemplate.class));
+        this(aObjectInstance,
+                (ConstantMovementBehaviorTemplate) aObjectInstance.getOwnerGameObject().getBehaviorTemplate(ConstantMovementBehaviorTemplate.TYPE));
     }
 
     ConstantMovementBehavior(GameObjectInstance aObjectInstance, ConstantMovementBehaviorTemplate aTemplate) {
@@ -61,7 +64,7 @@ public class ConstantMovementBehavior implements Behavior, ConstantMovement, Ref
     }
 
     public void registerEvents(GameRuntime aGameRuntime) {
-        aGameRuntime.getEventManager().register(objectInstance, SystemTick.class, new GameEventListener<SystemTick>() {
+        aGameRuntime.getEventManager().register(objectInstance, SystemTick.EVENTTYPE, new GameEventListener<SystemTick>() {
             @Override
             public void handleGameEvent(SystemTick aEvent) {
                 if (!remoteObject) {
@@ -95,7 +98,7 @@ public class ConstantMovementBehavior implements Behavior, ConstantMovement, Ref
 
     @Override
     public ConstantMovementBehaviorTemplate getTemplate() {
-        return objectInstance.getOwnerGameObject().getBehaviorTemplate(ConstantMovementBehaviorTemplate.class);
+        return (ConstantMovementBehaviorTemplate) objectInstance.getOwnerGameObject().getBehaviorTemplate(ConstantMovementBehaviorTemplate.TYPE);
     }
 
     @Override

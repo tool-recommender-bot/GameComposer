@@ -30,7 +30,7 @@ import java.util.Map;
 @InheritedClassInformation
 public class PropertyChanged extends GameEvent implements DistributableEvent {
 
-    public static final String EVENT_ID = "PropertyChanged";
+    public static final String EVENTTYPE = "PropertyChanged";
 
     private static final PropertyChangedClassInformation CIINSTANCE = new PropertyChangedClassInformation();
 
@@ -41,7 +41,7 @@ public class PropertyChanged extends GameEvent implements DistributableEvent {
     public final Object oldValue;
 
     public PropertyChanged(Property aProperty, Object aOldValue) {
-        super(EVENT_ID);
+        super(EVENTTYPE);
         property = aProperty;
         oldValue = aOldValue;
     }

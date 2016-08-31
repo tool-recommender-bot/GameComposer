@@ -36,8 +36,9 @@ import java.util.Map;
 public class CameraBehavior implements Behavior, Camera, Reflectable<CameraClassInformation> {
 
     private static final CameraClassInformation CIINSTANCE = new CameraClassInformation();
+    private static final String TYPE_ATTRIBUTE = "type";
 
-    static final String TYPE = "Camera";
+    public static final String TYPE = "Camera";
 
     private final GameObjectInstance objectInstance;
     private final Property<CameraType> type;
@@ -46,7 +47,8 @@ public class CameraBehavior implements Behavior, Camera, Reflectable<CameraClass
     private Size screenSize;
 
     CameraBehavior(GameObjectInstance aObjectInstance) {
-        this(aObjectInstance, aObjectInstance.getOwnerGameObject().getBehaviorTemplate(CameraBehaviorTemplate.class));
+        this(aObjectInstance,
+                (CameraBehaviorTemplate) aObjectInstance.getOwnerGameObject().getBehaviorTemplate(CameraBehaviorTemplate.TYPE));
     }
 
     CameraBehavior(GameObjectInstance aObjectInstance, CameraBehaviorTemplate aTemplate) {
@@ -59,7 +61,7 @@ public class CameraBehavior implements Behavior, Camera, Reflectable<CameraClass
     }
 
     void registerEvents(GameRuntime aGameRuntime) {
-        aGameRuntime.getEventManager().register(objectInstance, SetScreenResolution.class,
+        aGameRuntime.getEventManager().register(objectInstance, SetScreenResolution.EVENTTYPE,
                 new GameEventListener<SetScreenResolution>() {
                     @Override
                     public void handleGameEvent(SetScreenResolution aEvent) {
@@ -149,7 +151,7 @@ public class CameraBehavior implements Behavior, Camera, Reflectable<CameraClass
 
     @Override
     public CameraBehaviorTemplate getTemplate() {
-        return objectInstance.getOwnerGameObject().getBehaviorTemplate(CameraBehaviorTemplate.class);
+        return (CameraBehaviorTemplate) objectInstance.getOwnerGameObject().getBehaviorTemplate(CameraBehaviorTemplate.TYPE);
     }
 
     @Override

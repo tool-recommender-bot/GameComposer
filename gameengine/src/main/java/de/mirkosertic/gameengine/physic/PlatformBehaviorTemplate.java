@@ -29,6 +29,8 @@ import java.util.Map;
 
 public class PlatformBehaviorTemplate implements BehaviorTemplate<PlatformBehavior>, Platform, Reflectable<PlatformClassInformation> {
 
+    public static final String TYPE = "PlatformBehaviorTemplate";
+
     private static final PlatformClassInformation CIINSTANCE = new PlatformClassInformation();
 
     private final GameObject owner;
@@ -96,9 +98,14 @@ public class PlatformBehaviorTemplate implements BehaviorTemplate<PlatformBehavi
     }
 
     @Override
+    public String getType() {
+        return TYPE;
+    }
+
+    @Override
     public Map<String, Object> serialize() {
         Map<String, Object> theResult = new HashMap<>();
-        theResult.put(PlatformBehavior.TYPE_ATTRIBUTE, PlatformBehavior.TYPE);
+        theResult.put(TYPE_ATTRIBUTE, PlatformBehavior.TYPE);
         theResult.put(MOVE_LEFT_KEY_PROPERTY, moveLeftKey.get().name());
         theResult.put(MOVE_RIGHT_KEY_PROPERTY, moveRightKey.get().name());
         theResult.put(JUMP_KEY_PROPERTY, jumpKey.get().name());

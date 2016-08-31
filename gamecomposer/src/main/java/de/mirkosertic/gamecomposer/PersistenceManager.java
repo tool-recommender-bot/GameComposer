@@ -117,7 +117,7 @@ public class PersistenceManager {
             game.defaultSceneProperty().set(theSceneID);
         }
 
-        theRuntime.getEventManager().register(null, GameEvent.class, new EventCDIForwarder());
+        theRuntime.getEventManager().register(null, GameEvent.CATCHALL, new EventCDIForwarder());
 
         statusEvent.fire(new StatusEvent("New scene created at " + theSceneDirectory, StatusEvent.Severity.INFO));
 
@@ -177,7 +177,7 @@ public class PersistenceManager {
         currentGameDirectory = theGameDirectory;
 
         for (Map.Entry<String, GameScene> theEntry : gameScenes.entrySet()) {
-            theEntry.getValue().getRuntime().getEventManager().register(null, GameEvent.class, new EventCDIForwarder());
+            theEntry.getValue().getRuntime().getEventManager().register(null, GameEvent.CATCHALL, new EventCDIForwarder());
         }
 
         statusEvent.fire(new StatusEvent("Game loaded", StatusEvent.Severity.INFO));

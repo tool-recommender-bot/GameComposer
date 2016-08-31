@@ -18,9 +18,9 @@ package de.mirkosertic.gameengine.event;
 import de.mirkosertic.gameengine.annotations.ReflectiveField;
 import de.mirkosertic.gameengine.type.Reflectable;
 
-public abstract class GameEvent implements Reflectable<GameEventClassInformation> {
+public abstract class GameEvent implements Reflectable {
 
-    private static final GameEventClassInformation CIINSTANCE = new GameEventClassInformation();
+    public static final String CATCHALL = "GameEvent";
 
     @ReflectiveField
     public final String type;
@@ -29,8 +29,7 @@ public abstract class GameEvent implements Reflectable<GameEventClassInformation
         type = aType;
     }
 
-    @Override
-    public GameEventClassInformation getClassInformation() {
-        return CIINSTANCE;
+    public String getType() {
+        return type;
     }
 }

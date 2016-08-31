@@ -25,8 +25,8 @@ import java.util.Map;
 public class StaticBehavior implements Behavior, Static, Reflectable<StaticClassInformation> {
 
     private static final StaticClassInformation CIINSTANCE = new StaticClassInformation();
-    
-    static final String TYPE = "Static";
+
+    public static final String TYPE = "Static";
 
     private final GameObjectInstance objectInstance;
 
@@ -53,7 +53,7 @@ public class StaticBehavior implements Behavior, Static, Reflectable<StaticClass
 
     @Override
     public StaticBehaviorTemplate getTemplate() {
-        return objectInstance.getOwnerGameObject().getBehaviorTemplate(StaticBehaviorTemplate.class);
+        return (StaticBehaviorTemplate) objectInstance.getOwnerGameObject().getBehaviorTemplate(StaticBehaviorTemplate.TYPE);
     }
 
     @Override

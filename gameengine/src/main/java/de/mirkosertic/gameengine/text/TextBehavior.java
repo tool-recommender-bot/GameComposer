@@ -31,7 +31,7 @@ public class TextBehavior implements Behavior, Text, Reflectable<TextClassInform
 
     private static final TextClassInformation CIINSTANCE = new TextClassInformation();
 
-    static final String TYPE = "Text";
+    public static final String TYPE = "Text";
 
     private final GameObjectInstance objectInstance;
 
@@ -41,7 +41,8 @@ public class TextBehavior implements Behavior, Text, Reflectable<TextClassInform
     private final Property<Boolean> isScript;
 
     TextBehavior(GameObjectInstance aObjectInstance) {
-        this(aObjectInstance, aObjectInstance.getOwnerGameObject().getBehaviorTemplate(TextBehaviorTemplate.class));
+        this(aObjectInstance,
+                (TextBehaviorTemplate) aObjectInstance.getOwnerGameObject().getBehaviorTemplate(TextBehaviorTemplate.TYPE));
     }
 
     TextBehavior(GameObjectInstance aObjectInstance, TextBehaviorTemplate aTemplate) {
@@ -98,7 +99,7 @@ public class TextBehavior implements Behavior, Text, Reflectable<TextClassInform
 
     @Override
     public TextBehaviorTemplate getTemplate() {
-        return objectInstance.getOwnerGameObject().getBehaviorTemplate(TextBehaviorTemplate.class);
+        return (TextBehaviorTemplate) objectInstance.getOwnerGameObject().getBehaviorTemplate(TextBehaviorTemplate.TYPE);
     }
 
     @Override

@@ -15,9 +15,9 @@
  */
 package de.mirkosertic.gameengine.core;
 
-public interface GameSystemWork {
+public abstract class GameSystemWork {
 
-    GameSystemWork NOTHING = new GameSystemWork() {
+    public static final GameSystemWork NOTHING = new GameSystemWork() {
         @Override
         public void runInFrame() {
 
@@ -28,7 +28,7 @@ public interface GameSystemWork {
         }
     };
 
-    void runInFrame();
+    public abstract void runInFrame();
 
-    void runAfterFrame();
+    public abstract void runAfterFrame();
 }

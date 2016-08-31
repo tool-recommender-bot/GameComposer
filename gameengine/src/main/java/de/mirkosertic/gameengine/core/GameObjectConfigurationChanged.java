@@ -22,13 +22,15 @@ import de.mirkosertic.gameengine.event.GameEvent;
 @InheritedClassInformation
 public class GameObjectConfigurationChanged extends GameEvent {
 
+    public static final String EVENTTYPE = "GameObjectConfigurationChanged";
+
     private static final GameObjectConfigurationChangedClassInformation CIINSTANCE = new GameObjectConfigurationChangedClassInformation();
 
     @ReflectiveField
     public final GameObject object;
 
     public GameObjectConfigurationChanged(GameObject aObject) {
-        super("GameObjectConfigurationChanged");
+        super(EVENTTYPE);
         object = aObject;
     }
 

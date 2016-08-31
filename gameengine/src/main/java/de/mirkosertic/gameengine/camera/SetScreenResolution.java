@@ -23,13 +23,15 @@ import de.mirkosertic.gameengine.type.Size;
 @InheritedClassInformation
 public class SetScreenResolution extends GameEvent {
 
+    public static final String EVENTTYPE = "SetScreenResolution";
+
     private static final SetScreenResolutionClassInformation CIINSTANCE = new SetScreenResolutionClassInformation();
 
     @ReflectiveField
     public final Size screenSize;
 
     public SetScreenResolution(Size aSize) {
-        super("SetScreenResolution");
+        super(EVENTTYPE);
         screenSize = aSize;
     }
 

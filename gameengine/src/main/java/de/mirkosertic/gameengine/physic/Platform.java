@@ -28,6 +28,8 @@ public interface Platform {
     String LEFT_RIGHT_IMPULSE_PROPERTY = "leftRightImpulse";
     String JUMP_IMPULSE_PROPERTY = "jumpImpulse";
 
+    String TYPE_ATTRIBUTE = "type";
+
     @ReflectiveField
     Property<GameKeyCode> moveLeftKeyProperty();
 

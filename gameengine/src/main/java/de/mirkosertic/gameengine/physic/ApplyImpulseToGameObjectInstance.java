@@ -24,6 +24,8 @@ import de.mirkosertic.gameengine.type.Force;
 @InheritedClassInformation
 public class ApplyImpulseToGameObjectInstance extends GameEvent {
 
+    public static final String EVENTTYPE = "ApplyImpulseToGameObjectInstance";
+
     private static final ApplyImpulseToGameObjectInstanceClassInformation CIINSTANCE = new ApplyImpulseToGameObjectInstanceClassInformation();
 
     @ReflectiveField
@@ -33,7 +35,7 @@ public class ApplyImpulseToGameObjectInstance extends GameEvent {
     public final Force force;
 
     public ApplyImpulseToGameObjectInstance(GameObjectInstance aInstance, Force aForce) {
-        super("ApplyImpulseToGameObjectInstance");
+        super(EVENTTYPE);
         instance = aInstance;
         force = aForce;
     }

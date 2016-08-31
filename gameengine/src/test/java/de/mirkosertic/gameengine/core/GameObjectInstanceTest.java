@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 import de.mirkosertic.gameengine.event.GameEventManager;
 import de.mirkosertic.gameengine.event.Property;
 import de.mirkosertic.gameengine.event.PropertyChanged;
+import de.mirkosertic.gameengine.text.TextBehavior;
 import de.mirkosertic.gameengine.type.Angle;
 import de.mirkosertic.gameengine.type.Position;
 import de.mirkosertic.gameengine.type.PositionAnchor;
@@ -162,14 +163,15 @@ public class GameObjectInstanceTest {
 
         BehaviorTemplate theTemplate = mock(BehaviorTemplate.class);
         Behavior theBehavior = mock(Behavior.class);
+        when(theBehavior.getType()).thenReturn("type");
         when(theBehavior.getTemplate()).thenReturn(theTemplate);
 
         GameObjectInstance theInstance = new GameObjectInstance(theEventManager, theOwner);
-        assertNull(theInstance.getBehavior(theBehavior.getClass()));
+        assertNull(theInstance.getBehavior("type"));
         theInstance.addBehavior(theBehavior);
-        assertSame(theBehavior, theInstance.getBehavior(theBehavior.getClass()));
+        assertSame(theBehavior, theInstance.getBehavior("type"));
         theInstance.removeBehavior(theBehavior);
-        assertNull(theInstance.getBehavior(theBehavior.getClass()));
+        assertNull(theInstance.getBehavior("type"));
     }
 
     @Test
@@ -182,13 +184,14 @@ public class GameObjectInstanceTest {
 
         BehaviorTemplate theTemplate = mock(BehaviorTemplate.class);
         Behavior theBehavior = mock(Behavior.class);
+        when(theBehavior.getType()).thenReturn("type");
         when(theBehavior.getTemplate()).thenReturn(theTemplate);
 
         Behavior theBehavior2 = new Behavior() {
 
             @Override
             public String getType() {
-                return null;
+                return "type2";
             }
 
             @Override
@@ -212,13 +215,13 @@ public class GameObjectInstanceTest {
         };
 
         GameObjectInstance theInstance = new GameObjectInstance(theEventManager, theOwner);
-        assertNull(theInstance.getBehavior(theBehavior.getClass()));
+        assertNull(theInstance.getBehavior("type"));
         theInstance.addBehavior(theBehavior);
         theInstance.addBehavior(theBehavior2);
-        assertSame(theBehavior, theInstance.getBehavior(theBehavior.getClass()));
+        assertSame(theBehavior, theInstance.getBehavior("type"));
         theInstance.removeBehaviorByTemplate(theTemplate);
-        assertNull(theInstance.getBehavior(theBehavior.getClass()));
-        assertSame(theBehavior2, theInstance.getBehavior(theBehavior2.getClass()));
+        assertNull(theInstance.getBehavior("type"));
+        assertSame(theBehavior2, theInstance.getBehavior(theBehavior2.getType()));
     }
 
     @Test
@@ -290,6 +293,7 @@ public class GameObjectInstanceTest {
         when(theOwner.visibleProperty()).thenReturn(theVisibleProperty);
 
         Behavior theBehavior = mock(Behavior.class);
+        when(theBehavior.getType()).thenReturn("type");
 
         IORegistry theRegistry = mock(IORegistry.class);
         BehaviorUnmarshaller theUnmarshaller = mock(BehaviorUnmarshaller.class);
@@ -309,7 +313,7 @@ public class GameObjectInstanceTest {
         theData.put("absolutePositionAnchor", "BOTTOM_LEFT");
         List<Map<String, Object>> theBehaviors = new ArrayList<>();
         Map<String, Object> theSingleBehavior = new HashMap<>();
-        theSingleBehavior.put(Behavior.TYPE_ATTRIBUTE, "Behav");
+        theSingleBehavior.put(TextBehavior.TYPE_ATTRIBUTE, "Behav");
         theBehaviors.add(theSingleBehavior);
         theData.put("components", theBehaviors);
 
@@ -322,7 +326,7 @@ public class GameObjectInstanceTest {
         assertFalse(theInstance.visibleProperty().get());
         assertEquals(PositionAnchor.BOTTOM_LEFT, theInstance.positionAnchorProperty().get());
 
-        assertEquals(theBehavior, theInstance.getBehavior(theBehavior.getClass()));
+        assertEquals(theBehavior, theInstance.getBehavior(theBehavior.getType()));
     }
 
     @Test
@@ -336,6 +340,7 @@ public class GameObjectInstanceTest {
         when(theOwner.visibleProperty()).thenReturn(theVisibleProperty);
 
         Behavior theBehavior = mock(Behavior.class);
+        when(theBehavior.getType()).thenReturn("type");
 
         IORegistry theRegistry = mock(IORegistry.class);
         BehaviorUnmarshaller theUnmarshaller = mock(BehaviorUnmarshaller.class);
@@ -355,7 +360,7 @@ public class GameObjectInstanceTest {
         theData.put(GameObjectInstance.POSITION_ANCHOR_PROPERTY, "BOTTOM_LEFT");
         List<Map<String, Object>> theBehaviors = new ArrayList<>();
         Map<String, Object> theSingleBehavior = new HashMap<>();
-        theSingleBehavior.put(Behavior.TYPE_ATTRIBUTE, "Behav");
+        theSingleBehavior.put(TextBehavior.TYPE_ATTRIBUTE, "Behav");
         theBehaviors.add(theSingleBehavior);
         theData.put("components", theBehaviors);
 
@@ -368,6 +373,6 @@ public class GameObjectInstanceTest {
         assertFalse(theInstance.visibleProperty().get());
         assertEquals(PositionAnchor.SCENE, theInstance.positionAnchorProperty().get());
 
-        assertEquals(theBehavior, theInstance.getBehavior(theBehavior.getClass()));
+        assertEquals(theBehavior, theInstance.getBehavior(theBehavior.getType()));
     }
 }

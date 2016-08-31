@@ -17,6 +17,7 @@ package de.mirkosertic.gameengine.camera;
 
 import de.mirkosertic.gameengine.core.GameObjectInstance;
 import de.mirkosertic.gameengine.process.AbstractGameProcess;
+import de.mirkosertic.gameengine.process.ProceedResult;
 import de.mirkosertic.gameengine.type.Position;
 import de.mirkosertic.gameengine.type.Size;
 
@@ -33,7 +34,7 @@ public class FollowCameraProcess extends AbstractGameProcess {
     @Override
     public ProceedResult proceedGame(long aGameTime, long aElapsedTimeSinceLastLoop) {
 
-        CameraBehavior theCameraBehavior = cameraObject.getBehavior(CameraBehavior.class);
+        CameraBehavior theCameraBehavior = cameraObject.getBehavior(CameraBehavior.TYPE);
         Position theCameraPosition = cameraObject.positionProperty().get();
         Size theCameraSize = theCameraBehavior.getScreenSize();
 

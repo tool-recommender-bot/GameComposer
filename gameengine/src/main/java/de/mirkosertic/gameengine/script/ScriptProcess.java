@@ -19,6 +19,7 @@ import de.mirkosertic.gameengine.core.GameObjectInstance;
 import de.mirkosertic.gameengine.core.GameScene;
 import de.mirkosertic.gameengine.event.GameEvent;
 import de.mirkosertic.gameengine.process.GameProcess;
+import de.mirkosertic.gameengine.process.ProceedResult;
 import de.mirkosertic.gameengine.scriptengine.LUAScriptEngine;
 import de.mirkosertic.gameengine.scriptengine.LUAScriptEngineFactory;
 import de.mirkosertic.gameengine.type.Script;

@@ -19,6 +19,8 @@ import de.mirkosertic.gameengine.annotations.ReflectiveMethod;
 
 public interface Static {
 
+    String TYPE_ATTRIBUTE = "type";
+
     @ReflectiveMethod
     void delete();
 }

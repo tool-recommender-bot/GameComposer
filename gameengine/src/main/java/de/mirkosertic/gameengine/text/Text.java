@@ -29,6 +29,8 @@ public interface Text {
     String TEXT_EXPRESSION_PROPERTY = "textExpression";
     String ISSCRIPT_PROPERTY = "isScript";
 
+    String TYPE_ATTRIBUTE = "type";
+
     @ReflectiveField
     Property<Font> fontProperty();
 

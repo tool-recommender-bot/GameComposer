@@ -31,6 +31,7 @@ import java.util.Set;
 public class GameObject implements Reflectable<GameObjectClassInformation> {
 
     private static final GameObjectClassInformation CIINSTANCE = new GameObjectClassInformation();
+    private static final String TYPE_ATTRIBUTE = "type";
 
     public static final String UUID_PROPERTY = "uuid";
     public static final String NAME_PROPERTY = "name";
@@ -89,7 +90,7 @@ public class GameObject implements Reflectable<GameObjectClassInformation> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(o instanceof GameObject)) return false;
 
         GameObject that = (GameObject) o;
 
@@ -102,17 +103,17 @@ public class GameObject implements Reflectable<GameObjectClassInformation> {
     }
 
     public void add(BehaviorTemplate aBehaviorTemplate) {
-        componentTemplates.put(aBehaviorTemplate.getClass().getSimpleName(), aBehaviorTemplate);
+        componentTemplates.put(aBehaviorTemplate.getType(), aBehaviorTemplate);
         gameScene.getRuntime().getEventManager().fire(new GameObjectConfigurationChanged(this));
     }
 
     public void remove(BehaviorTemplate aBehaviorTemplate) {
-        componentTemplates.remove(aBehaviorTemplate.getClass().getSimpleName());
+        componentTemplates.remove(aBehaviorTemplate.getType());
         gameScene.getRuntime().getEventManager().fire(new GameObjectConfigurationChanged(this));
     }
 
-    public <T extends BehaviorTemplate> T getBehaviorTemplate(Class<T> aBehaviorClass) {
-        return (T) componentTemplates.get(aBehaviorClass.getSimpleName());
+    public BehaviorTemplate getBehaviorTemplate(String aTemplateType) {
+        return componentTemplates.get(aTemplateType);
     }
 
     @Override
@@ -157,7 +158,7 @@ public class GameObject implements Reflectable<GameObjectClassInformation> {
 
         List<Map<String, Object>> theTemplates = (List<Map<String, Object>>) theSerializedData.get("templates");
         for (Map<String, Object> theTemplate : theTemplates) {
-            String theTypeKey = (String) theTemplate.get(Behavior.TYPE_ATTRIBUTE);
+            String theTypeKey = (String) theTemplate.get(TYPE_ATTRIBUTE);
             theObject.add(aGameRuntime.getIORegistry().getBehaviorTemplateUnmarshallerFor(theTypeKey).deserialize(aGameRuntime.getEventManager(), theObject, theTemplate));
         }
 

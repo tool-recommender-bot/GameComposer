@@ -28,6 +28,8 @@ import java.util.Map;
 
 public class StaticBehaviorTemplate implements BehaviorTemplate<StaticBehavior>, Static, Reflectable<StaticClassInformation> {
 
+    public static final String TYPE = "StaticBehaviorTemplate";
+
     private static final StaticClassInformation CIINSTANCE = new StaticClassInformation();
 
     private final GameObject owner;
@@ -55,13 +57,18 @@ public class StaticBehaviorTemplate implements BehaviorTemplate<StaticBehavior>,
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> theResult = new HashMap<>();
-        theResult.put(StaticBehavior.TYPE_ATTRIBUTE, StaticBehavior.TYPE);
+        theResult.put(TYPE_ATTRIBUTE, StaticBehavior.TYPE);
         return theResult;
     }
 
     @Override
     public void delete() {
         owner.getGameScene().removeBehaviorFrom(owner, this);
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
     public static StaticBehaviorTemplate deserialize(GameEventManager aEventManager, GameObject aOwner) {

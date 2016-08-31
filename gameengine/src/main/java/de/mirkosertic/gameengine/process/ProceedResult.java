@@ -13,19 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.mirkosertic.gameengine.core;
+package de.mirkosertic.gameengine.process;
 
-import java.util.Map;
-
-public interface Behavior {
-
-    String getType();
-
-    GameObjectInstance getInstance();
-
-    Map<String, Object> serialize();
-
-    <T extends BehaviorTemplate> T getTemplate();
-
-    void markAsRemoteObject();
+public enum ProceedResult {
+    STOPPED, CONTINUE_RUNNING
 }

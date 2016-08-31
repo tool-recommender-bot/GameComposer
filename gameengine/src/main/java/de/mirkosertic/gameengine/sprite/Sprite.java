@@ -27,6 +27,8 @@ public interface Sprite {
 
     String SPEED_PROPERTY = "speed";
 
+    String TYPE_ATTRIBUTE = "type";
+
     @ReflectiveField
     Property<Animation> currentAnimationProperty();
 

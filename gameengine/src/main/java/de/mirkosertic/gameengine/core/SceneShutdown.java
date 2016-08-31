@@ -16,10 +16,21 @@
 package de.mirkosertic.gameengine.core;
 
 import de.mirkosertic.gameengine.event.GameEvent;
+import de.mirkosertic.gameengine.event.GameEventClassInformation;
+import de.mirkosertic.gameengine.type.ClassInformation;
 
 public class SceneShutdown extends GameEvent {
 
+    private static final GameEventClassInformation CIINSTANCE = new GameEventClassInformation();
+
+    public static final String EVENTTYPE = "GameShutdown";
+
     public SceneShutdown() {
-        super("GameShutdown");
+        super(EVENTTYPE);
+    }
+
+    @Override
+    public ClassInformation getClassInformation() {
+        return CIINSTANCE;
     }
 }

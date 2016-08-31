@@ -24,7 +24,7 @@ public class ActionManagerFactory {
 
     public ActionManager create(GameScene aScene, GameEventManager aEventManager) {
         final ActionManager theManager = new ActionManager(aScene);
-        aEventManager.register(null, GameEvent.class, new GameEventListener<GameEvent>() {
+        aEventManager.register(null, GameEvent.CATCHALL, new GameEventListener<GameEvent>() {
             @Override
             public void handleGameEvent(GameEvent aEvent) {
                 theManager.onEvent(aEvent);

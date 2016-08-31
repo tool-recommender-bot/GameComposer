@@ -74,7 +74,7 @@ public class GameProcessManager implements GameSystem {
                     List<GameProcess> theNewChildProcesses = new ArrayList<>();
 
                     for (GameProcess theProcess : runningProcesses) {
-                        GameProcess.ProceedResult theResult = theProcess.proceedGame(aGameTime, processesAmountOfTime);
+                        ProceedResult theResult = theProcess.proceedGame(aGameTime, processesAmountOfTime);
                         switch (theResult) {
                         case CONTINUE_RUNNING:
                             // The process wants to continue, so we do it

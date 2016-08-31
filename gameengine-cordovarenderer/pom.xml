@@ -158,7 +158,7 @@
         </profile>
 
         <profile>
-            <id>platform-wubdiws</id>
+            <id>platform-windows</id>
             <activation>
                 <os>
                     <family>windows</family>

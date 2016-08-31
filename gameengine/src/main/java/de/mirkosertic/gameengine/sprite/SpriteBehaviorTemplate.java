@@ -34,6 +34,8 @@ import java.util.Map;
 
 public class SpriteBehaviorTemplate implements BehaviorTemplate<SpriteBehavior>, Sprite, Reflectable<SpriteClassInformation> {
 
+    public static final String TYPE = "SpriteBehaviorTemplate";
+
     private static final SpriteClassInformation CIINSTANCE = new SpriteClassInformation();
 
     private final Property<Animation> currentAnimation;
@@ -95,7 +97,7 @@ public class SpriteBehaviorTemplate implements BehaviorTemplate<SpriteBehavior>,
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> theResult = new HashMap<>();
-        theResult.put(SpriteBehavior.TYPE_ATTRIBUTE, SpriteBehavior.TYPE);
+        theResult.put(TYPE_ATTRIBUTE, SpriteBehavior.TYPE);
         List<Map<String, Object>> theAnimations = new ArrayList<>();
         for (Animation theAnimation : animations) {
             theAnimations.add(theAnimation.serialize());
@@ -121,6 +123,11 @@ public class SpriteBehaviorTemplate implements BehaviorTemplate<SpriteBehavior>,
     @Override
     public Animation[] getAnimations() {
         return animations.toArray(new Animation[animations.size()]);
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
     public void replaceAnimation(Animation aOldAnimation, Animation aNewAnimation) {

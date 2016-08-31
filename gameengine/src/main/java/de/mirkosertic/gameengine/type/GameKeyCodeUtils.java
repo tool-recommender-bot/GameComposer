@@ -23,13 +23,13 @@ import java.util.List;
 public class GameKeyCodeUtils {
     public static GameKeyCode fromChar(char aCharacter) {
         switch(Character.toUpperCase(aCharacter)) {
-            case 13:
+            case (char) 13:
                 return GameKeyCode.ENTER;
-            case 8:
+            case (char) 8:
                 return GameKeyCode.BACK_SPACE;
-            case 9:
+            case (char) 9:
                 return GameKeyCode.TAB;
-            case 27:
+            case (char) 27:
                 return GameKeyCode.ESCAPE;
             case ' ':
                 return GameKeyCode.SPACE;

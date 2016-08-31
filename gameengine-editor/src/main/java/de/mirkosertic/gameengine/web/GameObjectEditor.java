@@ -114,14 +114,14 @@ public class GameObjectEditor extends ListingElement {
         addSizePropertyEditor(aObject.sizeProperty());
         addBooleanPropertyEditor("Visible", aObject.visibleProperty());
 
-        addSubComponent(aObject.getBehaviorTemplate(CameraBehaviorTemplate.class));
-        addSubComponent(aObject.getBehaviorTemplate(PlayerScoreBehaviorTemplate.class));
-        addSubComponent(aObject.getBehaviorTemplate(StaticBehaviorTemplate.class));
-        addSubComponent(aObject.getBehaviorTemplate(TextBehaviorTemplate.class));
-        addSubComponent(aObject.getBehaviorTemplate(PlatformBehaviorTemplate.class));
-        addSubComponent(aObject.getBehaviorTemplate(ConstantMovementBehaviorTemplate.class));
-        addSubComponent(aObject.getBehaviorTemplate(PhysicsBehaviorTemplate.class));
-        addSubComponent(aObject.getBehaviorTemplate(SpriteBehaviorTemplate.class), aObject.getGameScene());
+        addSubComponent((CameraBehaviorTemplate) aObject.getBehaviorTemplate(CameraBehaviorTemplate.TYPE));
+        addSubComponent((PlayerScoreBehaviorTemplate) aObject.getBehaviorTemplate(PlayerScoreBehaviorTemplate.TYPE));
+        addSubComponent((StaticBehaviorTemplate) aObject.getBehaviorTemplate(StaticBehaviorTemplate.TYPE));
+        addSubComponent((TextBehaviorTemplate) aObject.getBehaviorTemplate(TextBehaviorTemplate.TYPE));
+        addSubComponent((PlatformBehaviorTemplate) aObject.getBehaviorTemplate(PlatformBehaviorTemplate.TYPE));
+        addSubComponent((ConstantMovementBehaviorTemplate) aObject.getBehaviorTemplate(ConstantMovementBehaviorTemplate.TYPE));
+        addSubComponent((PhysicsBehaviorTemplate) aObject.getBehaviorTemplate(PhysicsBehaviorTemplate.TYPE));
+        addSubComponent((SpriteBehaviorTemplate) aObject.getBehaviorTemplate(SpriteBehaviorTemplate.TYPE), aObject.getGameScene());
     }
 
     public void setEditingObject(GameScene aObject) {
@@ -166,14 +166,14 @@ public class GameObjectEditor extends ListingElement {
         });
         addSelectionEditor("Anchor", aObject.positionAnchorProperty(), PositionAnchor.values());
 
-        addSubComponent(aObject.getBehavior(CameraBehavior.class));
-        addSubComponent(aObject.getBehavior(PlayerScoreBehavior.class));
-        addSubComponent(aObject.getBehavior(StaticBehavior.class));
-        addSubComponent(aObject.getBehavior(TextBehavior.class));
-        addSubComponent(aObject.getBehavior(PlatformBehavior.class));
-        addSubComponent(aObject.getBehavior(ConstantMovementBehavior.class));
-        addSubComponent(aObject.getBehavior(PhysicsBehavior.class));
-        addSubComponent(aObject.getBehavior(SpriteBehavior.class), aObject.getOwnerGameObject().getGameScene());
+        addSubComponent((CameraBehavior) aObject.getBehavior(CameraBehavior.TYPE));
+        addSubComponent((PlayerScoreBehavior) aObject.getBehavior(PlayerScoreBehavior.TYPE));
+        addSubComponent((StaticBehavior) aObject.getBehavior(StaticBehavior.TYPE));
+        addSubComponent((TextBehavior) aObject.getBehavior(TextBehavior.TYPE));
+        addSubComponent((PlatformBehavior) aObject.getBehavior(PlatformBehavior.TYPE));
+        addSubComponent((ConstantMovementBehavior) aObject.getBehavior(ConstantMovementBehavior.TYPE));
+        addSubComponent((PhysicsBehavior) aObject.getBehavior(PhysicsBehavior.TYPE));
+        addSubComponent((SpriteBehavior) aObject.getBehavior(SpriteBehavior.TYPE), aObject.getOwnerGameObject().getGameScene());
     }
 
     private void addSubComponent(Camera aComponent) {

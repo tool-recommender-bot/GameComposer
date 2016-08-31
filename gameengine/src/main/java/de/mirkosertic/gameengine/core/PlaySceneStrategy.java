@@ -84,7 +84,7 @@ public abstract class PlaySceneStrategy {
         GameRuntime theRuntime = aGameScene.getRuntime();
         GameEventManager theEventManager = theRuntime.getEventManager();
 
-        theEventManager.register(null, SystemException.class, new GameEventListener<SystemException>() {
+        theEventManager.register(null, SystemException.EVENTTYPE, new GameEventListener<SystemException>() {
             @Override
             public void handleGameEvent(SystemException aEvent) {
                 handleSystemException(aEvent);
@@ -95,7 +95,7 @@ public abstract class PlaySceneStrategy {
 
         GameObject theCameraObject = aGameScene.cameraObjectProperty().get();
         GameObjectInstance theCameraObjectInstance = aGameScene.createFrom(theCameraObject);
-        CameraBehavior theCameraBehavior = theCameraObjectInstance.getBehavior(CameraBehavior.class);
+        CameraBehavior theCameraBehavior = theCameraObjectInstance.getBehavior(CameraBehavior.TYPE);
 
         GameObjectInstance thePlayerInstance = null;
         for (GameObjectInstance theInstance : aGameScene.getInstances()) {
@@ -112,7 +112,7 @@ public abstract class PlaySceneStrategy {
         }
 
         // This is our hook to load new scenes
-        theEventManager.register(null, RunScene.class, new GameEventListener<RunScene>() {
+        theEventManager.register(null, RunScene.EVENTTYPE, new GameEventListener<RunScene>() {
             @Override
             public void handleGameEvent(RunScene aEvent) {
                 loadOtherScene(aEvent.sceneId);
@@ -148,7 +148,7 @@ public abstract class PlaySceneStrategy {
 
             final GameObjectInstance theFinalPlayer = thePlayerInstance;
 
-            theEventManager.register(null, NewGameInstance.class, new GameEventListener<NewGameInstance>() {
+            theEventManager.register(null, NewGameInstance.EVENTTYPE, new GameEventListener<NewGameInstance>() {
                 @Override
                 public void handleGameEvent(NewGameInstance aEvent) {
                     // Inform the other instances about the current player

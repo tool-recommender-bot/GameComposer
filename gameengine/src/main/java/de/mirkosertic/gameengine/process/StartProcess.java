@@ -22,13 +22,15 @@ import de.mirkosertic.gameengine.event.GameEvent;
 @InheritedClassInformation
 public class StartProcess extends GameEvent {
 
+    public static final String EVENTTYPE = "StartProcess";
+
     private static final StartProcessClassInformation CIINSTANCE = new StartProcessClassInformation();
 
     @ReflectiveField
     public final GameProcess process;
 
     public StartProcess(GameProcess aProcess) {
-        super("StartProcess");
+        super(EVENTTYPE);
         process = aProcess;
     }
 

@@ -23,13 +23,15 @@ import de.mirkosertic.gameengine.type.GameKeyCode;
 @InheritedClassInformation
 public class KeyReleased extends GameEvent {
 
+    public static final String EVENTTYPE = "KeyReleased";
+
     private static final KeyReleasedClassInformation CIINSTANCE = new KeyReleasedClassInformation();
 
     @ReflectiveField
     public final GameKeyCode keyCode;
 
     KeyReleased(GameKeyCode aKeyCode) {
-        super("KeyReleased");
+        super(EVENTTYPE);
         keyCode = aKeyCode;
     }
 

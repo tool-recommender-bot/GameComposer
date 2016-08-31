@@ -29,6 +29,8 @@ import java.util.Map;
 
 public class PlayerScoreBehaviorTemplate implements BehaviorTemplate<PlayerScoreBehavior>, PlayerScore, Reflectable<PlayerScoreClassInformation> {
 
+    public static final String TYPE = "PlayerScoreBehaviorTemplate";
+
     private static final PlayerScoreClassInformation CIINSTANCE = new PlayerScoreClassInformation();
 
     private final GameObject owner;
@@ -62,7 +64,7 @@ public class PlayerScoreBehaviorTemplate implements BehaviorTemplate<PlayerScore
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> theResult = new HashMap<>();
-        theResult.put(PlayerScoreBehavior.TYPE_ATTRIBUTE, PlayerScoreBehavior.TYPE);
+        theResult.put(TYPE_ATTRIBUTE, PlayerScoreBehavior.TYPE);
         theResult.put(SCORE_VALUE_PROPERTY, scoreValue.get().serialize());
         return theResult;
     }
@@ -70,6 +72,11 @@ public class PlayerScoreBehaviorTemplate implements BehaviorTemplate<PlayerScore
     @Override
     public void delete() {
         owner.getGameScene().removeBehaviorFrom(owner, this);
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
     public static PlayerScoreBehaviorTemplate deserialize(GameObject aOwner, GameEventManager aEventmanager, Map<String, Object> aSerializedData) {

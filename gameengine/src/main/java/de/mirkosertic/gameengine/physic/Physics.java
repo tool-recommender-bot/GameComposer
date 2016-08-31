@@ -21,6 +21,8 @@ import de.mirkosertic.gameengine.event.Property;
 
 public interface Physics {
 
+    String TYPE_ATTRIBUTE = "type";
+
     String ACTIVE_PROPERTY = "active";
     String FIXED_ROTATION_PROPERTY = "fixedRotation";
     String DENSITY_PROPERTY = "density";

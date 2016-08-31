@@ -32,6 +32,7 @@ import java.util.Map;
 public class GameObjectInstance implements Reflectable<GameObjectInstanceClassInformation> {
 
     private static final GameObjectInstanceClassInformation CIINSTANCE = new GameObjectInstanceClassInformation();
+    private static final String TYPE_ATTRIBUTE = "type";
 
     public static final String UUID_PROPERTY = "uuid";
     public static final String NAME_PROPERTY = "name";
@@ -40,7 +41,7 @@ public class GameObjectInstance implements Reflectable<GameObjectInstanceClassIn
     public static final String ROTATION_ANGLE_PROPERTY = "rotationAngle";
     public static final String POSITION_ANCHOR_PROPERTY = "positionAnchor";
 
-    private final Map<Class<? extends Behavior>, Behavior> behaviors;
+    private final Map<String, Behavior> behaviors;
 
     private final GameObject ownerGameObject;
 
@@ -106,16 +107,16 @@ public class GameObjectInstance implements Reflectable<GameObjectInstanceClassIn
     }
 
     void addBehavior(Behavior aBehavior) {
-        behaviors.put(aBehavior.getClass(), aBehavior);
+        behaviors.put(aBehavior.getType(), aBehavior);
     }
 
     public void removeBehavior(Behavior aBehavior) {
-        behaviors.remove(aBehavior.getClass());
+        behaviors.remove(aBehavior.getType());
     }
 
     public void removeBehaviorByTemplate(BehaviorTemplate aTemplate) {
-        Map<Class<? extends Behavior>, Behavior> theKnownBehaviors = new HashMap<>(behaviors);
-        for (Map.Entry<Class<? extends Behavior>, Behavior> theEntry : theKnownBehaviors.entrySet()) {
+        Map<String, Behavior> theKnownBehaviors = new HashMap<>(behaviors);
+        for (Map.Entry<String, Behavior> theEntry : theKnownBehaviors.entrySet()) {
             if (theEntry.getValue().getTemplate() == aTemplate) {
                 removeBehavior(theEntry.getValue());
             }
@@ -124,16 +125,11 @@ public class GameObjectInstance implements Reflectable<GameObjectInstanceClassIn
 
     @ReflectiveMethod
     public Behavior findBehaviorByType(String aType) {
-        for (Map.Entry<Class<? extends Behavior>, Behavior> theEntry : behaviors.entrySet()) {
-            if (aType.equals(theEntry.getValue().getType())) {
-                return theEntry.getValue();
-            }
-        }
-        return null;
+        return behaviors.get(aType);
     }
 
-    public <T extends Behavior> T getBehavior(Class<T> aComponentClass) {
-        return (T) behaviors.get(aComponentClass);
+    public <T extends Behavior> T getBehavior(String aType) {
+        return (T) behaviors.get(aType);
     }
 
     public void markAsRemoteObject() {
@@ -215,7 +211,7 @@ public class GameObjectInstance implements Reflectable<GameObjectInstanceClassIn
         }
         List<Map<String, Object>> theComponents = (List<Map<String, Object>>) theInstance.get("components");
         for (Map<String, Object> theStructure : theComponents) {
-            String theType = (String) theStructure.get(Behavior.TYPE_ATTRIBUTE);
+            String theType = (String) theStructure.get(TYPE_ATTRIBUTE);
 
             BehaviorUnmarshaller theUnmarshaller = aGameRuntime.getIORegistry().getBehaviorUnmarshallerFor(theType);
             theResult.addBehavior(theUnmarshaller.deserialize(aGameRuntime, theResult, theStructure));

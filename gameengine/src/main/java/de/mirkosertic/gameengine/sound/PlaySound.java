@@ -23,13 +23,15 @@ import de.mirkosertic.gameengine.type.ResourceName;
 @InheritedClassInformation
 class PlaySound extends GameEvent {
 
+    public static final String EVENTTYPE = "PlaySound";
+
     private static final PlaySoundClassInformation CIINSTANCE = new PlaySoundClassInformation();
 
     @ReflectiveField
     public final ResourceName resourceName;
 
     public PlaySound(ResourceName aResourceName) {
-        super("PlaySound");
+        super(EVENTTYPE);
         resourceName = aResourceName;
     }
 

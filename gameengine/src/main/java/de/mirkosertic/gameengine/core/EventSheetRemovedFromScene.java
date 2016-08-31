@@ -22,13 +22,15 @@ import de.mirkosertic.gameengine.event.GameEvent;
 @InheritedClassInformation
 public class EventSheetRemovedFromScene extends GameEvent {
 
+    public static final String EVENTTYPE = "EventSheetRemovedFromScene";
+
     private static final EventSheetRemovedFromSceneClassInformation CIINSTANCE = new EventSheetRemovedFromSceneClassInformation();
 
     @ReflectiveField
     public final EventSheet eventSheet;
 
     public EventSheetRemovedFromScene(EventSheet aEventSheet) {
-        super("EventSheetRemovedFromScene");
+        super(EVENTTYPE);
         eventSheet = aEventSheet;
     }
 

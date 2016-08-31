@@ -332,7 +332,7 @@ public class GameSceneEditorController implements ContentController<GameScene> {
 
         // Detect and create a camera
         GameObjectInstance theCameraInstance = thePreviewScene.createFrom(theDefaultCamera);
-        final CameraBehavior theCameraInstanceBehavior = theCameraInstance.getBehavior(CameraBehavior.class);
+        final CameraBehavior theCameraInstanceBehavior = theCameraInstance.getBehavior(CameraBehavior.TYPE);
         if (theCameraInstanceBehavior == null) {
             throw new IllegalArgumentException("No camera component in camera object");
         }
@@ -370,7 +370,7 @@ public class GameSceneEditorController implements ContentController<GameScene> {
 
             final GameObjectInstance theFinalPlayer = thePlayerInstance;
 
-            theEventManager.register(null, NewGameInstance.class, aEvent -> {
+            theEventManager.register(null, NewGameInstance.EVENTTYPE, aEvent -> {
                 // Inform the other instances about the current player
                 theNetworkGameView.handleGameEvent(new GameObjectInstanceAddedToScene(theFinalPlayer));
             });
@@ -379,7 +379,7 @@ public class GameSceneEditorController implements ContentController<GameScene> {
         // Set defaults, this will be overridden
         Size theInitialSize = new Size(200,200);
 
-        theEventManager.register(null, SetScreenResolution.class, new GameEventListener<SetScreenResolution>() {
+        theEventManager.register(null, SetScreenResolution.EVENTTYPE, new GameEventListener<SetScreenResolution>() {
             @Override
             public void handleGameEvent(SetScreenResolution aEvent) {
                 thePreviewGameView.setCurrentScreenSize(aEvent.screenSize);
@@ -388,7 +388,7 @@ public class GameSceneEditorController implements ContentController<GameScene> {
 
         theEventManager.fire(new SetScreenResolution(theInitialSize));
 
-        theEventManager.register(null, SystemException.class, new GameEventListener<SystemException>() {
+        theEventManager.register(null, SystemException.EVENTTYPE, new GameEventListener<SystemException>() {
             @Override
             public void handleGameEvent(SystemException aEvent) {
                 List<String> theExceptions = theLoggerView.getItems();

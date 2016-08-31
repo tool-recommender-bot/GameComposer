@@ -17,6 +17,7 @@ package de.mirkosertic.gameengine.starfield;
 
 import de.mirkosertic.gameengine.core.GameObjectInstance;
 import de.mirkosertic.gameengine.process.GameProcess;
+import de.mirkosertic.gameengine.process.ProceedResult;
 
 public class StarfieldGameProcess implements GameProcess {
 

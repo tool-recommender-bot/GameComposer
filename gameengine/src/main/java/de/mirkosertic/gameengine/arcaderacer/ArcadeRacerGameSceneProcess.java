@@ -17,6 +17,7 @@ package de.mirkosertic.gameengine.arcaderacer;
 
 import de.mirkosertic.gameengine.core.GameObjectInstance;
 import de.mirkosertic.gameengine.process.GameProcess;
+import de.mirkosertic.gameengine.process.ProceedResult;
 
 public class ArcadeRacerGameSceneProcess implements GameProcess {
 

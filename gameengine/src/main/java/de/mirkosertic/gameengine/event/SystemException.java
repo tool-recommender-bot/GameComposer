@@ -15,17 +15,28 @@
  */
 package de.mirkosertic.gameengine.event;
 
+import de.mirkosertic.gameengine.type.ClassInformation;
+
 public class SystemException extends GameEvent {
+
+    private static final GameEventClassInformation CIINSTANCE = new GameEventClassInformation();
+
+    public static final String EVENTTYPE = "SystemException";
 
     public final Exception exception;
 
     public SystemException(Exception aException) {
-        super("SystemException");
+        super(EVENTTYPE);
         exception = aException;
     }
 
     @Override
     public String toString() {
         return exception.getMessage();
+    }
+
+    @Override
+    public ClassInformation getClassInformation() {
+        return CIINSTANCE;
     }
 }

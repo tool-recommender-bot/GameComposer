@@ -26,7 +26,7 @@ import de.mirkosertic.gameengine.core.GameSceneEffectType;
 import de.mirkosertic.gameengine.event.GameEventListener;
 import de.mirkosertic.gameengine.event.GameEventManager;
 import de.mirkosertic.gameengine.event.Property;
-import de.mirkosertic.gameengine.process.GameProcess;
+import de.mirkosertic.gameengine.process.ProceedResult;
 import de.mirkosertic.gameengine.process.StartProcess;
 import de.mirkosertic.gameengine.type.ClassInformation;
 import de.mirkosertic.gameengine.type.Color;
@@ -79,7 +79,7 @@ public class ArcadeRacerGameSceneEffect implements GameSceneEffect {
         cameraHeight = new Property<>(Double.class, this, CAMERAHEIGHT_PROPERTY, 2d, aEventManager);
         distanceCamera = new Property<>(Integer.class, this, DISTANCECAMERA_PROPERTY, -3, aEventManager);
 
-        aEventManager.register(this, SetScreenResolution.class, new GameEventListener<SetScreenResolution>() {
+        aEventManager.register(this, SetScreenResolution.EVENTTYPE, new GameEventListener<SetScreenResolution>() {
             @Override
             public void handleGameEvent(SetScreenResolution aEvent) {
                 screenSize = aEvent.screenSize;
@@ -312,9 +312,9 @@ public class ArcadeRacerGameSceneEffect implements GameSceneEffect {
         return theResult;
     }
 
-    public GameProcess.ProceedResult proceesGame(long aGameTime, long aElapsedTimeSinceLastLoop) {
+    public ProceedResult proceesGame(long aGameTime, long aElapsedTimeSinceLastLoop) {
         positionOnTrack.set(positionOnTrack.get() + speed.get() / 1000 * aElapsedTimeSinceLastLoop);
         gameTime = aGameTime;
-        return GameProcess.ProceedResult.CONTINUE_RUNNING;
+        return ProceedResult.CONTINUE_RUNNING;
     }
 }

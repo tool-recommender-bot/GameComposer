@@ -22,6 +22,7 @@ import de.mirkosertic.gameengine.type.ScoreValue;
 
 public interface PlayerScore {
 
+    String TYPE_ATTRIBUTE = "type";
     String SCORE_VALUE_PROPERTY = "scoreValue";
 
     @ReflectiveField

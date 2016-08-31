@@ -68,7 +68,7 @@ public class GameObjectElementConfigurator implements ObjectInspectorElementConf
         theResult.add(theActions);
 
         List<ActionPropertyEditorItem.Action> theAddBehaviorActions = new ArrayList<>();
-        if (aObject.getBehaviorTemplate(CameraBehaviorTemplate.class) == null) {
+        if (aObject.getBehaviorTemplate(CameraBehaviorTemplate.TYPE) == null) {
             theAddBehaviorActions.add(new ActionPropertyEditorItem.Action("Add camera behavior", new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -77,7 +77,7 @@ public class GameObjectElementConfigurator implements ObjectInspectorElementConf
                 }
             }));
         }
-        if (aObject.getBehaviorTemplate(PhysicsBehaviorTemplate.class) == null) {
+        if (aObject.getBehaviorTemplate(PhysicsBehaviorTemplate.TYPE) == null) {
             theAddBehaviorActions.add(new ActionPropertyEditorItem.Action("Add physics behavior", new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -86,7 +86,7 @@ public class GameObjectElementConfigurator implements ObjectInspectorElementConf
                 }
             }));
         }
-        if (aObject.getBehaviorTemplate(PlatformBehaviorTemplate.class) == null) {
+        if (aObject.getBehaviorTemplate(PlatformBehaviorTemplate.TYPE) == null) {
             theAddBehaviorActions.add(new ActionPropertyEditorItem.Action("Add platform behavior", new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -95,7 +95,7 @@ public class GameObjectElementConfigurator implements ObjectInspectorElementConf
                 }
             }));
         }
-        if (aObject.getBehaviorTemplate(PlayerScoreBehaviorTemplate.class) == null) {
+        if (aObject.getBehaviorTemplate(PlayerScoreBehaviorTemplate.TYPE) == null) {
             theAddBehaviorActions.add(new ActionPropertyEditorItem.Action("Add player score behavior", new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -104,7 +104,7 @@ public class GameObjectElementConfigurator implements ObjectInspectorElementConf
                 }
             }));
         }
-        if (aObject.getBehaviorTemplate(SpriteBehaviorTemplate.class) == null) {
+        if (aObject.getBehaviorTemplate(SpriteBehaviorTemplate.TYPE) == null) {
             theAddBehaviorActions.add(new ActionPropertyEditorItem.Action("Add sprite behavior", new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -113,7 +113,7 @@ public class GameObjectElementConfigurator implements ObjectInspectorElementConf
                 }
             }));
         }
-        if (aObject.getBehaviorTemplate(StaticBehaviorTemplate.class) == null) {
+        if (aObject.getBehaviorTemplate(StaticBehaviorTemplate.TYPE) == null) {
             theAddBehaviorActions.add(new ActionPropertyEditorItem.Action("Add static behavior", new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -122,7 +122,7 @@ public class GameObjectElementConfigurator implements ObjectInspectorElementConf
                 }
             }));
         }
-        if (aObject.getBehaviorTemplate(TextBehaviorTemplate.class) == null) {
+        if (aObject.getBehaviorTemplate(TextBehaviorTemplate.TYPE) == null) {
             theAddBehaviorActions.add(new ActionPropertyEditorItem.Action("Add text behavior", new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -131,7 +131,7 @@ public class GameObjectElementConfigurator implements ObjectInspectorElementConf
                 }
             }));
         }
-        if (aObject.getBehaviorTemplate(ConstantMovementBehaviorTemplate.class) == null) {
+        if (aObject.getBehaviorTemplate(ConstantMovementBehaviorTemplate.TYPE) == null) {
             theAddBehaviorActions.add(new ActionPropertyEditorItem.Action("Add constant movement behavior", new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {

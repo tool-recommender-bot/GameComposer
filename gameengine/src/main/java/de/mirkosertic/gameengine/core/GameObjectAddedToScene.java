@@ -22,6 +22,8 @@ import de.mirkosertic.gameengine.event.GameEvent;
 @InheritedClassInformation
 public class GameObjectAddedToScene extends GameEvent {
 
+    public static final String EVENTTYPE = "GameObjectAddedToScene";
+
     private static final GameObjectAddedToSceneClassInformation CIINSTANCE = new GameObjectAddedToSceneClassInformation();
 
     @ReflectiveField
@@ -31,7 +33,7 @@ public class GameObjectAddedToScene extends GameEvent {
     public final GameObject object;
 
     public GameObjectAddedToScene(GameScene aScene, GameObject aObject) {
-        super("GameObjectAddedToScene");
+        super(EVENTTYPE);
         scene = aScene;
         object = aObject;
     }

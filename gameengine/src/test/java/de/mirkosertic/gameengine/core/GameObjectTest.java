@@ -2,6 +2,7 @@ package de.mirkosertic.gameengine.core;
 
 import de.mirkosertic.gameengine.event.GameEventManager;
 import de.mirkosertic.gameengine.event.PropertyChanged;
+import de.mirkosertic.gameengine.text.TextBehavior;
 import de.mirkosertic.gameengine.type.Size;
 
 import java.util.ArrayList;
@@ -149,11 +150,12 @@ public class GameObjectTest {
         when(theScene.getRuntime()).thenReturn(theRuntime);
 
         BehaviorTemplate theBehavior = mock(BehaviorTemplate.class);
+        when(theBehavior.getType()).thenReturn("type");
 
         GameObject theObject = new GameObject(theScene, "Test");
-        assertNull(theObject.getBehaviorTemplate(theBehavior.getClass()));
+        assertNull(theObject.getBehaviorTemplate("type"));
         theObject.add(theBehavior);
-        assertSame(theBehavior, theObject.getBehaviorTemplate(theBehavior.getClass()));
+        assertSame(theBehavior, theObject.getBehaviorTemplate("type"));
         verify(theEventManager).fire(any(GameObjectConfigurationChanged.class));
     }
 
@@ -166,12 +168,13 @@ public class GameObjectTest {
         when(theScene.getRuntime()).thenReturn(theRuntime);
 
         BehaviorTemplate theBehavior = mock(BehaviorTemplate.class);
+        when(theBehavior.getType()).thenReturn("type");
 
         GameObject theObject = new GameObject(theScene, "Test");
-        assertNull(theObject.getBehaviorTemplate(theBehavior.getClass()));
+        assertNull(theObject.getBehaviorTemplate("type"));
         theObject.add(theBehavior);
         theObject.remove(theBehavior);
-        assertNull(theObject.getBehaviorTemplate(theBehavior.getClass()));
+        assertNull(theObject.getBehaviorTemplate("type"));
         verify(theEventManager, times(2)).fire(any(GameObjectConfigurationChanged.class));
     }
 
@@ -258,7 +261,7 @@ public class GameObjectTest {
         theData.put(GameObject.SIZE_PROPERTY, new Size(17, 18).serialize());
         List<Map<String, Object>> theTemplates = new ArrayList<>();
         Map<String, Object> theSingleBehavior = new HashMap<>();
-        theSingleBehavior.put(Behavior.TYPE_ATTRIBUTE, "behav");
+        theSingleBehavior.put(TextBehavior.TYPE_ATTRIBUTE, "behav");
         theTemplates.add(theSingleBehavior);
         theData.put("templates", theTemplates);
 

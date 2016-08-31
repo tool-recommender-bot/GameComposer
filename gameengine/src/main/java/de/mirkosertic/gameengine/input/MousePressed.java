@@ -24,6 +24,8 @@ import de.mirkosertic.gameengine.type.Position;
 @InheritedClassInformation
 public class MousePressed extends GameEvent {
 
+    public static final String EVENTTYPE = "MousePressed";
+
     private static final MousePressedClassInformation CIINSTANCE = new MousePressedClassInformation();
 
     @ReflectiveField
@@ -33,7 +35,7 @@ public class MousePressed extends GameEvent {
     public final GameObjectInstance[] affectedInstances;
 
     MousePressed(Position aPosition, GameObjectInstance[] aAffectedInstances) {
-        super("MousePressed");
+        super(EVENTTYPE);
         position = aPosition;
         affectedInstances = aAffectedInstances;
     }

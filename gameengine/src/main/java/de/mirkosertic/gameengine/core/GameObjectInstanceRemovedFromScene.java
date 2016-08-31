@@ -26,7 +26,7 @@ import java.util.Map;
 @InheritedClassInformation
 public class GameObjectInstanceRemovedFromScene extends GameEvent implements DistributableEvent {
 
-    public static final String EVENT_ID = "GameObjectInstanceRemovedFromScene";
+    public static final String EVENTTYPE = "GameObjectInstanceRemovedFromScene";
 
     private static final GameObjectInstanceRemovedFromSceneClassInformation CIINSTANCE = new GameObjectInstanceRemovedFromSceneClassInformation();
 
@@ -37,7 +37,7 @@ public class GameObjectInstanceRemovedFromScene extends GameEvent implements Dis
     public final GameObjectInstance instance;
 
     public GameObjectInstanceRemovedFromScene(GameScene aScene, GameObjectInstance aInstance) {
-        super(EVENT_ID);
+        super(EVENTTYPE);
         scene = aScene;
         instance = aInstance;
     }

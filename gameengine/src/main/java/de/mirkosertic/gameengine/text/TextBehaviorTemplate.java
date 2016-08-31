@@ -31,6 +31,8 @@ import java.util.Map;
 
 public class TextBehaviorTemplate implements BehaviorTemplate<TextBehavior>, Text, Reflectable<TextClassInformation> {
 
+    public static final String TYPE = "TextBehaviorTemplate";
+
     private static final TextClassInformation CIINSTANCE = new TextClassInformation();
 
     private final Property<Font> font;
@@ -86,7 +88,7 @@ public class TextBehaviorTemplate implements BehaviorTemplate<TextBehavior>, Tex
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> theResult = new HashMap<>();
-        theResult.put(TextBehavior.TYPE_ATTRIBUTE, TextBehavior.TYPE);
+        theResult.put(TYPE_ATTRIBUTE, TextBehavior.TYPE);
         theResult.put(FONT_PROPERTY, font.get().serialize());
         theResult.put(TEXT_EXPRESSION_PROPERTY, textExpression.get().serialize());
         theResult.put(COLOR_PROPERTY, color.get().serialize());
@@ -97,6 +99,11 @@ public class TextBehaviorTemplate implements BehaviorTemplate<TextBehavior>, Tex
     @Override
     public void delete() {
         owner.getGameScene().removeBehaviorFrom(owner, this);
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
     public static TextBehaviorTemplate deserialize(GameEventManager aEventManager, GameObject aOwner, Map<String, Object> aSerializedData) {

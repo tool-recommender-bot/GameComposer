@@ -25,7 +25,7 @@ import de.mirkosertic.gameengine.core.GameSceneEffectType;
 import de.mirkosertic.gameengine.event.GameEventListener;
 import de.mirkosertic.gameengine.event.GameEventManager;
 import de.mirkosertic.gameengine.event.Property;
-import de.mirkosertic.gameengine.process.GameProcess;
+import de.mirkosertic.gameengine.process.ProceedResult;
 import de.mirkosertic.gameengine.process.StartProcess;
 import de.mirkosertic.gameengine.type.Color;
 import de.mirkosertic.gameengine.type.EffectCanvas;
@@ -65,7 +65,7 @@ public class StarfieldGameSceneEffect implements GameSceneEffect {
         starSpeed = new Property<>(Float.class, this, STAR_SPEED_PROPERTY, 7f, aEventManager);
         color = new Property<>(Color.class, this, COLOR_PROPERTY, Color.WHITE, aEventManager);
 
-        aEventManager.register(this, SetScreenResolution.class, new GameEventListener<SetScreenResolution>() {
+        aEventManager.register(this, SetScreenResolution.EVENTTYPE, new GameEventListener<SetScreenResolution>() {
             @Override
             public void handleGameEvent(SetScreenResolution aEvent) {
                 setScreenSize(aEvent.screenSize);
@@ -123,7 +123,7 @@ public class StarfieldGameSceneEffect implements GameSceneEffect {
         return theResult;
     }
 
-    public GameProcess.ProceedResult proceedGame(long aGameTime, long aElapsedTimeSinceLastLoop) {
+    public ProceedResult proceedGame(long aGameTime, long aElapsedTimeSinceLastLoop) {
         Position[] theEvolvedPositions = new Position[stars.length];
 
         float theMovement = starSpeed.get() / 1000 * aElapsedTimeSinceLastLoop;
@@ -135,7 +135,7 @@ public class StarfieldGameSceneEffect implements GameSceneEffect {
 
         stars = theEvolvedPositions;
 
-        return GameProcess.ProceedResult.CONTINUE_RUNNING;
+        return ProceedResult.CONTINUE_RUNNING;
     }
 
     private void setScreenSize(Size aSize) {

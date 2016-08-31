@@ -31,14 +31,15 @@ public class SpriteBehavior implements Behavior, Sprite, Reflectable<SpriteClass
 
     private static final SpriteClassInformation CIINSTANCE = new SpriteClassInformation();
 
-    static final String TYPE = "Sprite";
+    public static final String TYPE = "Sprite";
 
     private final GameObjectInstance objectInstance;
     private final Property<Animation> currentAnimation;
     private final Property<Integer> speed;
 
     private SpriteBehavior(GameObjectInstance aObjectInstance) {
-        this(aObjectInstance, aObjectInstance.getOwnerGameObject().getBehaviorTemplate(SpriteBehaviorTemplate.class));
+        this(aObjectInstance,
+                (SpriteBehaviorTemplate) aObjectInstance.getOwnerGameObject().getBehaviorTemplate(SpriteBehaviorTemplate.TYPE));
     }
 
     SpriteBehavior(GameObjectInstance aObjectInstance, SpriteBehaviorTemplate aTemplate) {
@@ -79,7 +80,7 @@ public class SpriteBehavior implements Behavior, Sprite, Reflectable<SpriteClass
 
     @Override
     public SpriteBehaviorTemplate getTemplate() {
-        return objectInstance.getOwnerGameObject().getBehaviorTemplate(SpriteBehaviorTemplate.class);
+        return (SpriteBehaviorTemplate) objectInstance.getOwnerGameObject().getBehaviorTemplate(SpriteBehaviorTemplate.TYPE);
     }
 
     @Override

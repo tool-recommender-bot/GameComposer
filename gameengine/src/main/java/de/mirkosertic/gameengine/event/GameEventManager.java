@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class GameEventManager implements GameEventListener {
 
-    private final Map<Class<GameEvent>, GameEventListener[]> registeredListeners;
+    private final Map<String, GameEventListener[]> registeredListeners;
 
     private GameEventListener catchAllEventListener[];
 
@@ -32,26 +32,25 @@ public class GameEventManager implements GameEventListener {
         catchAllEventListener = new GameEventListener[0];
     }
 
-    public void register(Object aOwningInstance, Class aEvent, GameEventListener aEventListener) {
-        GameEventListener[] theListener = registeredListeners.get(aEvent);
-        if (theListener == null) {
-            theListener = new GameEventListener[] { aEventListener };
-            registeredListeners.put(aEvent, theListener);
+    public void register(Object aOwningInstance, String aEventName, GameEventListener aEventListener) {
+        if (aEventName.equals(GameEvent.CATCHALL)) {
+            // Catch All Listener registrieren
+            List<GameEventListener> theCatchAllListener = ArrayUtils.asList(catchAllEventListener);
+            theCatchAllListener.add(aEventListener);
+            catchAllEventListener = theCatchAllListener.toArray(new GameEventListener[theCatchAllListener.size()]);
+        } else {
+            // Normalen Listener registrieren
+            GameEventListener[] theListener = registeredListeners.get(aEventName);
+            if (theListener == null) {
+                theListener = new GameEventListener[] { aEventListener };
+                registeredListeners.put(aEventName, theListener);
+            } else {
+                List<GameEventListener> theListenerList = ArrayUtils.asList(theListener);
+                theListenerList.add(aEventListener);
 
-            if (aEvent == GameEvent.class) {
-                catchAllEventListener = new GameEventListener[] { aEventListener };
+                GameEventListener[] theEventListener = theListenerList.toArray(new GameEventListener[theListenerList.size()]);
+                registeredListeners.put(aEventName, theEventListener);
             }
-
-            return;
-        }
-        List<GameEventListener> theListenerList = ArrayUtils.asList(theListener);
-        theListenerList.add(aEventListener);
-
-        GameEventListener[] theEventListener = theListenerList.toArray(new GameEventListener[theListenerList.size()]);
-        registeredListeners.put(aEvent, theEventListener);
-
-        if (aEvent == GameEvent.class) {
-            catchAllEventListener = theEventListener;
         }
     }
 
@@ -61,7 +60,7 @@ public class GameEventManager implements GameEventListener {
                 theListener.handleGameEvent(aEvent);
             }
 
-            GameEventListener[] theRegisteredListener = registeredListeners.get(aEvent.getClass());
+            GameEventListener[] theRegisteredListener = registeredListeners.get(aEvent.getType());
             if (theRegisteredListener != null) {
                 for (GameEventListener theListener : theRegisteredListener) {
                     theListener.handleGameEvent(aEvent);

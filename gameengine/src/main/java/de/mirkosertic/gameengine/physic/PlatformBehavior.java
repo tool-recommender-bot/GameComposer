@@ -37,7 +37,7 @@ public class PlatformBehavior implements Behavior, Platform, Reflectable<Platfor
 
     private static final PlatformClassInformation CIINSTANCE = new PlatformClassInformation();
 
-    static final String TYPE = "Platform";
+    public static final String TYPE = "Platform";
 
     private final GameRuntime gameRuntime;
     private final GameObjectInstance objectInstance;
@@ -59,7 +59,7 @@ public class PlatformBehavior implements Behavior, Platform, Reflectable<Platfor
         gameRuntime = aGameRuntime;
         objectInstance = aObjectInstance;
 
-        PlatformBehaviorTemplate theTemplate = aObjectInstance.getOwnerGameObject().getBehaviorTemplate(PlatformBehaviorTemplate.class);
+        PlatformBehaviorTemplate theTemplate = (PlatformBehaviorTemplate) aObjectInstance.getOwnerGameObject().getBehaviorTemplate(PlatformBehaviorTemplate.TYPE);
         GameEventManager theEventManager = aObjectInstance.getOwnerGameObject().getGameScene().getRuntime().getEventManager();
 
         moveLeftKey = new Property<>(GameKeyCode.class, this, MOVE_LEFT_KEY_PROPERTY, theTemplate.moveLeftKeyProperty().get(), theEventManager);
@@ -80,7 +80,7 @@ public class PlatformBehavior implements Behavior, Platform, Reflectable<Platfor
     }
 
     public void registerEvents(GameRuntime aGameRuntime) {
-        aGameRuntime.getEventManager().register(objectInstance, KeyPressed.class, new GameEventListener<KeyPressed>() {
+        aGameRuntime.getEventManager().register(objectInstance, KeyPressed.EVENTTYPE, new GameEventListener<KeyPressed>() {
             @Override
             public void handleGameEvent(KeyPressed aEvent) {
                 if (!remoteObject) {
@@ -88,7 +88,7 @@ public class PlatformBehavior implements Behavior, Platform, Reflectable<Platfor
                 }
             }
         });
-        aGameRuntime.getEventManager().register(objectInstance, KeyReleased.class, new GameEventListener<KeyReleased>() {
+        aGameRuntime.getEventManager().register(objectInstance, KeyReleased.EVENTTYPE, new GameEventListener<KeyReleased>() {
             @Override
             public void handleGameEvent(KeyReleased aEvent) {
                 if (!remoteObject) {
@@ -96,7 +96,7 @@ public class PlatformBehavior implements Behavior, Platform, Reflectable<Platfor
                 }
             }
         });
-        aGameRuntime.getEventManager().register(objectInstance, GameObjectCollision.class, new GameEventListener<GameObjectCollision>() {
+        aGameRuntime.getEventManager().register(objectInstance, GameObjectCollision.EVENTTYPE, new GameEventListener<GameObjectCollision>() {
             @Override
             public void handleGameEvent(GameObjectCollision aEvent) {
                 if (!remoteObject) {
@@ -104,7 +104,7 @@ public class PlatformBehavior implements Behavior, Platform, Reflectable<Platfor
                 }
             }
         });
-        aGameRuntime.getEventManager().register(objectInstance, SystemTick.class, new GameEventListener<SystemTick>() {
+        aGameRuntime.getEventManager().register(objectInstance, SystemTick.EVENTTYPE, new GameEventListener<SystemTick>() {
             @Override
             public void handleGameEvent(SystemTick aEvent) {
                 if (!remoteObject) {
@@ -214,7 +214,7 @@ public class PlatformBehavior implements Behavior, Platform, Reflectable<Platfor
 
     @Override
     public PlatformBehaviorTemplate getTemplate() {
-        return objectInstance.getOwnerGameObject().getBehaviorTemplate(PlatformBehaviorTemplate.class);
+        return (PlatformBehaviorTemplate) objectInstance.getOwnerGameObject().getBehaviorTemplate(PlatformBehaviorTemplate.TYPE);
     }
 
     @Override

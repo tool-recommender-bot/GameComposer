@@ -19,10 +19,6 @@ import de.mirkosertic.gameengine.core.GameObjectInstance;
 
 public interface GameProcess {
 
-    enum ProceedResult {
-        STOPPED, CONTINUE_RUNNING
-    }
-
     void started();
 
     boolean affectsInstance(GameObjectInstance aInstance);

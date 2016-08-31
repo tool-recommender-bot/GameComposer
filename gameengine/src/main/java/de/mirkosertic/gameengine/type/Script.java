@@ -31,7 +31,7 @@ public class Script implements Distributable {
         if (this == aValue) {
             return true;
         }
-        if (aValue == null || getClass() != aValue.getClass()) {
+        if (aValue == null || !(aValue instanceof Script)) {
             return false;
         }
 

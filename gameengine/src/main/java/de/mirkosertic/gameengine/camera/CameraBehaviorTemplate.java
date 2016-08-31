@@ -28,7 +28,10 @@ import java.util.Map;
 
 public class CameraBehaviorTemplate implements BehaviorTemplate<CameraBehavior>, Camera, Reflectable<CameraClassInformation> {
 
+    public static final String TYPE = "CameraBehaviorTemplate";
+
     private static final CameraClassInformation CIINSTANCE = new CameraClassInformation();
+    private static final String TYPE_ATTRIBUTE = "type";
 
     private final Property<CameraType> type;
     private final GameObject owner;
@@ -63,7 +66,7 @@ public class CameraBehaviorTemplate implements BehaviorTemplate<CameraBehavior>,
     @Override
     public Map<String, Object> serialize() {
         Map<String, Object> theResult = new HashMap<>();
-        theResult.put(CameraBehavior.TYPE_ATTRIBUTE, CameraBehavior.TYPE);
+        theResult.put(TYPE_ATTRIBUTE, CameraBehavior.TYPE);
         theResult.put("cameratype", type.get().name());
         return theResult;
     }
@@ -71,6 +74,11 @@ public class CameraBehaviorTemplate implements BehaviorTemplate<CameraBehavior>,
     @Override
     public void delete() {
         owner.getGameScene().removeBehaviorFrom(owner, this);
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 
     public static CameraBehaviorTemplate deserialize(GameEventManager aEventManager, GameObject aOwner, Map<String, Object> aSerializedData) {

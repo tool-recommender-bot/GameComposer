@@ -23,13 +23,15 @@ import de.mirkosertic.gameengine.event.GameEvent;
 @InheritedClassInformation
 class KillProcessesForInstance extends GameEvent {
 
+    public static final String EVENTTYPE = "KillProcessesForInstance";
+
     private static final KillProcessesForInstanceClassInformation CIINSTANCE = new KillProcessesForInstanceClassInformation();
 
     @ReflectiveField
     public final GameObjectInstance instance;
 
     KillProcessesForInstance(GameObjectInstance aInstance) {
-        super("KillProcessesForInstance");
+        super(EVENTTYPE);
         instance = aInstance;
     }
 

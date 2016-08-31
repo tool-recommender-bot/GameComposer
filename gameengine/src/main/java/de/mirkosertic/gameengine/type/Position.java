@@ -48,7 +48,7 @@ public class Position implements Reflectable<PositionClassInformation>, Distribu
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !(o instanceof Position)) return false;
 
         Position position = (Position) o;
 

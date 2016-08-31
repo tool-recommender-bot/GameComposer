@@ -30,7 +30,7 @@ public class NetworkGameViewFactory {
 
     public NetworkGameView createNetworkViewFor(GameEventManager aEventManager) {
         NetworkGameView theView = new NetworkGameView(networkConnector, eventInterpreter);
-        aEventManager.register(null, GameEvent.class, theView);
+        aEventManager.register(null, GameEvent.CATCHALL, theView);
         return theView;
     }
 }

@@ -23,13 +23,15 @@ import de.mirkosertic.gameengine.event.GameEvent;
 @InheritedClassInformation
 public class EnableDynamicPhysics extends GameEvent {
 
+    public static final String EVENTTYPE = "EnableDynamicPhysics";
+
     private static final EnableDynamicPhysicsClassInformation CIINSTANCE = new EnableDynamicPhysicsClassInformation();
 
     @ReflectiveField
     public final GameObjectInstance object;
 
     public EnableDynamicPhysics(GameObjectInstance aObject) {
-        super("EnableDynamicPhysics");
+        super(EVENTTYPE);
         object = aObject;
     }
 

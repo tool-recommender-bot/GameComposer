@@ -22,13 +22,15 @@ import de.mirkosertic.gameengine.event.GameEvent;
 @InheritedClassInformation
 public class RunScene extends GameEvent {
 
+    public static final String EVENTTYPE = "RunScene";
+
     private static final RunSceneClassInformation CIINSTANCE = new RunSceneClassInformation();
 
     @ReflectiveField
     public final String sceneId;
 
     public RunScene(String aSceneId) {
-        super("RunScene");
+        super(EVENTTYPE);
         sceneId = aSceneId;
     }
 
