@@ -41,8 +41,9 @@ public class NetworkGameView implements GameView, GameEventListener<GameEvent> {
 
     @Override
     public void handleGameEvent(GameEvent aEvent) {
-        if (aEvent instanceof DistributableEvent) {
-            eventsDuringLastLoopCycle.add((DistributableEvent) aEvent);
+        Object theValue = aEvent;
+        if (theValue instanceof DistributableEvent) {
+            eventsDuringLastLoopCycle.add((DistributableEvent) theValue);
         }
     }
 

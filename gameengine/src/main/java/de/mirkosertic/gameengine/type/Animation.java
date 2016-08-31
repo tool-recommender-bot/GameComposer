@@ -101,8 +101,10 @@ public class Animation implements Distributable {
         String theName = (String) aData.get("name");
         String theUUID = (String) aData.get("uuid");
         List<ResourceName> theAnimationSequence = new ArrayList<>();
-        for (Map<String, Object> theEntry : (List<Map<String, Object>>) aData.get("animationSequence")) {
-            theAnimationSequence.add(ResourceName.deserialize(theEntry));
+
+        List<Map<String, Object>> theEntries = (List<Map<String, Object>>) aData.get("animationSequence");
+        for (int i=0; i<theEntries.size();i++) {
+            theAnimationSequence.add(ResourceName.deserialize(theEntries.get(i)));
         }
         return new Animation(theUUID, theName, theAnimationSequence.toArray(new ResourceName[theAnimationSequence.size()]));
     }

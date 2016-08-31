@@ -30,43 +30,43 @@ public final class DistributableUtils {
     }
 
     public static Object convertToType(Object aData, Class aTargetType) {
-        if (Position.class == aTargetType) {
+        if (Position.class.equals(aTargetType)) {
             return Position.deserialize((Map<String, Object>) aData);
         }
-        if (Font.class == aTargetType) {
+        if (Font.class.equals(aTargetType)) {
             return Font.deserialize((Map<String, Object>) aData);
         }
-        if (Color.class == aTargetType) {
+        if (Color.class.equals(aTargetType)) {
             return Color.deserialize((Map<String, Object>) aData);
         }
-        if (Animation.class == aTargetType) {
+        if (Animation.class.equals(aTargetType)) {
             return Animation.deserialize((Map<String, Object>) aData);
         }
-        if (Script.class == aTargetType) {
+        if (Script.class.equals(aTargetType)) {
             return Script.deserialize((Map<String, Object>) aData);
         }
-        if (Angle.class == aTargetType) {
+        if (Angle.class.equals(aTargetType)) {
             return Angle.deserialize((Map<String, Object>) aData);
         }
-        if (Size.class == aTargetType) {
+        if (Size.class.equals(aTargetType)) {
             return Size.deserialize((Map<String, Object>) aData);
         }
-        if (TextExpression.class == aTargetType) {
+        if (TextExpression.class.equals(aTargetType)) {
             return TextExpression.deserialize((Map<String, Object>) aData);
         }
-        if (CustomProperties.class == aTargetType) {
+        if (CustomProperties.class.equals(aTargetType)) {
             return CustomProperties.deserialize((Map<String, Object>) aData);
         }
-        if (Rectangle.class == aTargetType) {
+        if (Rectangle.class.equals(aTargetType)) {
             return Rectangle.deserialize((Map<String, Object>) aData);
         }
-        if (ScoreValue.class == aTargetType) {
+        if (ScoreValue.class.equals(aTargetType)) {
             return ScoreValue.deserialize((Map<String, Object>) aData);
         }
-        if (ResourceName.class == aTargetType) {
+        if (ResourceName.class.equals(aTargetType)) {
             return ResourceName.deserialize((Map<String, Object>) aData);
         }
-        if (Speed.class == aTargetType) {
+        if (Speed.class.equals(aTargetType)) {
             return Speed.deserialize((Map<String, Object>) aData);
         }
         return aData;
@@ -77,7 +77,7 @@ public final class DistributableUtils {
         if (theField == null) {
             theField = aInstance.getClassInformation().getFieldByName(aPropertyName + "Property");
         }
-        if (theField != null && (theField.getType() == Property.class) || (theField.getType() == ReadOnlyProperty.class)) {
+        if (theField != null && (theField.getType().equals(Property.class)) || (theField.getType().equals(ReadOnlyProperty.class))) {
             Property theProperty = (Property) theField.getValue(aInstance);
             //if (aEventTimestamp > theProperty.getLastChanged()) {
                 theProperty.set(convertToType(aValue, theProperty.getType()));

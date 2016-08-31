@@ -30,17 +30,17 @@ public abstract class BuiltInFunctions implements Reflectable {
     @ReflectiveMethod
     public Number max(Number aNumber1, Number aNumber2) {
         if (aNumber1 instanceof Integer) {
-            return Math.max(aNumber1.intValue(), aNumber2.intValue());
+            return Math.max((int) aNumber1, (int) aNumber2);
         }
-        return Math.max(aNumber1.doubleValue(), aNumber2.doubleValue());
+        return Math.max((double) aNumber1, (double) aNumber2);
     }
 
     @ReflectiveMethod
     public Number min(Number aNumber1, Number aNumber2) {
         if (aNumber1 instanceof Integer) {
-            return Math.min(aNumber1.intValue(), aNumber2.intValue());
+            return Math.min((int) aNumber1, (int) aNumber2);
         }
-        return Math.min(aNumber1.doubleValue(), aNumber2.doubleValue());
+        return Math.min((double) aNumber1, (double) aNumber2);
     }
 
     @ReflectiveMethod

@@ -68,7 +68,7 @@ public class GameEventManager implements GameEventListener {
             }
         } catch (Exception e) {
             if (aEvent instanceof SystemException) {
-                throw new RuntimeException("Error dispatching system exception", e);
+                throw new RuntimeException("Error dispatching system exception");
             } else {
                 fire(new SystemException(e));
             }
