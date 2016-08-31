@@ -31,10 +31,10 @@ public class GameResourceCache {
         resourceLoader = aResourceLoader;
     }
 
-    public <T extends GameResource> T getResourceFor(ResourceName aResourceName) throws IOException {
-        T theResource = (T) cachedResources.get(aResourceName.name);
+    public GameResource getResourceFor(ResourceName aResourceName) throws IOException {
+        GameResource theResource = cachedResources.get(aResourceName.name);
         if (theResource == null) {
-            theResource = (T) resourceLoader.load(aResourceName);
+            theResource = resourceLoader.load(aResourceName);
             if (theResource == null) {
                 throw new IOException("Cannot load resource " + aResourceName.name);
             }

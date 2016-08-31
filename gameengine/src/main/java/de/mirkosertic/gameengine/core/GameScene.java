@@ -461,12 +461,12 @@ public class GameScene implements Reflectable<GameSceneClassInformation>, KeyVal
     }
 
     @Override
-    public <T> T getObjectForKey(Object aKey) {
-        return (T) keyValueStore.get(aKey);
+    public Object getObjectForKey(Object aKey) {
+        return keyValueStore.get(aKey);
     }
 
     @Override
-    public <T> void setObjectForKey(Object aKey, T aValue) {
+    public void setObjectForKey(Object aKey, Object aValue) {
         keyValueStore.put(aKey, aValue);
     }
 }

@@ -41,7 +41,7 @@ import de.mirkosertic.gameengine.type.TextExpression;
 
 import java.io.IOException;
 
-public abstract class GenericAbstractGameView<S extends GameResource> implements GameView {
+public abstract class GenericAbstractGameView implements GameView {
 
     private static final Position THE_DEBUG_CENTER = new Position(100, 5);
     private static final Size THE_DEBUG_TEXT_SIZE = new Size(300, 10);
@@ -104,7 +104,7 @@ public abstract class GenericAbstractGameView<S extends GameResource> implements
 
     protected abstract void beforeInstance(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, Angle aRotation);
 
-    protected abstract void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, S aResource);
+    protected abstract void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, GameResource aResource);
 
     protected abstract void drawText(String aID, Position aPositionOnScreen, Angle aAngle, Position aCenterOffset, de.mirkosertic.gameengine.type.Font aFont, de.mirkosertic.gameengine.type.Color aColor, String aText, Size aSize, boolean aVisible);
 
@@ -167,7 +167,7 @@ public abstract class GenericAbstractGameView<S extends GameResource> implements
                     ResourceName theSpriteResource = theSpriteBehavior.computeCurrentFrame(aGameTime);
                     if (theSpriteResource != null) {
                         try {
-                            S theGameResource = gameRuntime.getResourceCache()
+                            GameResource theGameResource = gameRuntime.getResourceCache()
                                     .getResourceFor(theSpriteResource);
 
                             drawImage(aValue, aPositionOnScreen, theCenterOffset, theGameResource);
@@ -187,7 +187,7 @@ public abstract class GenericAbstractGameView<S extends GameResource> implements
                     if (theTextBehavior.isScriptProperty().get()) {
 
                         String theCacheKey = aValue.uuidProperty().get() + ".luatext";
-                        CachedLUAText theCachedValue = aScene.getObjectForKey(theCacheKey);
+                        CachedLUAText theCachedValue = (CachedLUAText) aScene.getObjectForKey(theCacheKey);
 
                         if (theCachedValue == null || theCachedValue.needsUpdate(aGameTime)) {
                             // Scripting is enabled, so we have to evaluate the expression

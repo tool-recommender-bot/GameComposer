@@ -176,6 +176,7 @@
                         <configuration>
                             <outDir>javascript</outDir>
                             <targetVersion>ES3</targetVersion>
+                            <verbose>true</verbose>
                         </configuration>
                         <executions>
                             <execution>

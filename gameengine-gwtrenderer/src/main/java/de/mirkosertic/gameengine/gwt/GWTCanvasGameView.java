@@ -17,6 +17,7 @@ package de.mirkosertic.gameengine.gwt;
 
 import de.mirkosertic.gameengine.camera.CameraBehavior;
 import de.mirkosertic.gameengine.core.GameObjectInstance;
+import de.mirkosertic.gameengine.core.GameResource;
 import de.mirkosertic.gameengine.core.GameRuntime;
 import de.mirkosertic.gameengine.core.GameScene;
 import de.mirkosertic.gameengine.core.GestureDetector;
@@ -32,7 +33,7 @@ import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.CssColor;
 
-public class GWTCanvasGameView extends GenericAbstractGameView<GWTBitmapResource> {
+public class GWTCanvasGameView extends GenericAbstractGameView {
 
     private final Canvas canvas;
 
@@ -72,9 +73,10 @@ public class GWTCanvasGameView extends GenericAbstractGameView<GWTBitmapResource
     }
 
     @Override
-    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, GWTBitmapResource aResource) {
-        if (aResource.isLoaded()) {
-            context2d.drawImage(aResource.getImage(), -aCenterOffset.x, -aCenterOffset.y);
+    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, GameResource aResource) {
+        GWTBitmapResource theResource = (GWTBitmapResource) aResource;
+        if (theResource.isLoaded()) {
+            context2d.drawImage(theResource.getImage(), -aCenterOffset.x, -aCenterOffset.y);
         } else {
             Size theSize = aInstance.getOwnerGameObject().sizeProperty().get();
             context2d.setFillStyle(CssColor.make(255, 255, 255));

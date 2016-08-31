@@ -18,6 +18,7 @@ package de.mirkosertic.gameengine.dragome;
 import com.dragome.web.enhancers.jsdelegate.JsCast;
 import de.mirkosertic.gameengine.camera.CameraBehavior;
 import de.mirkosertic.gameengine.core.GameObjectInstance;
+import de.mirkosertic.gameengine.core.GameResource;
 import de.mirkosertic.gameengine.core.GameRuntime;
 import de.mirkosertic.gameengine.core.GameScene;
 import de.mirkosertic.gameengine.core.GestureDetector;
@@ -33,7 +34,7 @@ import org.w3c.dom.html.CanvasRenderingContext2D;
 import org.w3c.dom.html.HTMLCanvasElement;
 import org.w3c.dom.html.HTMLImageElement;
 
-class DragomeGameView extends GenericAbstractGameView<DragomeGameResource> {
+class DragomeGameView extends GenericAbstractGameView {
 
     private final HTMLCanvasElement canvas;
     private final CSSCache cssCache;
@@ -68,8 +69,9 @@ class DragomeGameView extends GenericAbstractGameView<DragomeGameResource> {
     }
 
     @Override
-    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, DragomeGameResource aResource) {
-		HTMLImageElement imageSource= (HTMLImageElement) aResource.getElement();
+    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, GameResource aResource) {
+        DragomeGameResource theResource = (DragomeGameResource) aResource;
+		HTMLImageElement imageSource= (HTMLImageElement) theResource.getElement();
         renderingContext2D.drawImage(imageSource, -aCenterOffset.x, -aCenterOffset.y);
     }
 

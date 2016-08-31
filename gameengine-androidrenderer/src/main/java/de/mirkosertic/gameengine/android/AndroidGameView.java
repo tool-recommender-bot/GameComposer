@@ -21,6 +21,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import de.mirkosertic.gameengine.camera.CameraBehavior;
 import de.mirkosertic.gameengine.core.GameObjectInstance;
+import de.mirkosertic.gameengine.core.GameResource;
 import de.mirkosertic.gameengine.core.GameRuntime;
 import de.mirkosertic.gameengine.core.GameScene;
 import de.mirkosertic.gameengine.core.GestureDetector;
@@ -32,7 +33,7 @@ import de.mirkosertic.gameengine.type.Font;
 import de.mirkosertic.gameengine.type.Position;
 import de.mirkosertic.gameengine.type.Size;
 
-public class AndroidGameView extends GenericAbstractGameView<AndroidBitmapResource> {
+public class AndroidGameView extends GenericAbstractGameView {
 
     private final AndroidCanvas androidCanvas;
     private final Typeface arialTypeface;
@@ -82,10 +83,11 @@ public class AndroidGameView extends GenericAbstractGameView<AndroidBitmapResour
     }
 
     @Override
-    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, AndroidBitmapResource aResource) {
+    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, GameResource aResource) {
+        AndroidBitmapResource theResource = (AndroidBitmapResource) aResource;
         Matrix theMatrix = new Matrix();
         theMatrix.postTranslate(aPositionOnScreen.x, aPositionOnScreen.y);
-        canvas.drawBitmap(aResource.bitmap, theMatrix, emptyPaint);
+        canvas.drawBitmap(theResource.bitmap, theMatrix, emptyPaint);
     }
 
     @Override

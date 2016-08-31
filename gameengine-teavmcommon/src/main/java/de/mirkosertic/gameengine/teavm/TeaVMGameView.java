@@ -41,7 +41,7 @@ import de.mirkosertic.gameengine.type.Size;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TeaVMGameView extends GenericAbstractGameView<GameResource> {
+public class TeaVMGameView extends GenericAbstractGameView {
 
     private final Renderer renderer;
     private final Map<String, DisplayObject> instances;

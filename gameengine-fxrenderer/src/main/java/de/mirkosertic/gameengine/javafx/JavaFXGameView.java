@@ -18,6 +18,7 @@ package de.mirkosertic.gameengine.javafx;
 import de.mirkosertic.gameengine.camera.CameraBehavior;
 import de.mirkosertic.gameengine.core.GameLoop;
 import de.mirkosertic.gameengine.core.GameObjectInstance;
+import de.mirkosertic.gameengine.core.GameResource;
 import de.mirkosertic.gameengine.core.GameRuntime;
 import de.mirkosertic.gameengine.core.GameScene;
 import de.mirkosertic.gameengine.core.GestureDetector;
@@ -35,7 +36,7 @@ import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
 
-public class JavaFXGameView extends GenericAbstractGameView<JavaFXBitmapResource> {
+public class JavaFXGameView extends GenericAbstractGameView {
 
     protected static class SavedState {
         public Paint fill;
@@ -92,8 +93,9 @@ public class JavaFXGameView extends GenericAbstractGameView<JavaFXBitmapResource
     }
 
     @Override
-    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, JavaFXBitmapResource aResource) {
-        context.drawImage(aResource, aPositionOnScreen.x, aPositionOnScreen.y);
+    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, GameResource aResource) {
+        JavaFXBitmapResource theResource = (JavaFXBitmapResource) aResource;
+        context.drawImage(theResource, aPositionOnScreen.x, aPositionOnScreen.y);
     }
 
     @Override

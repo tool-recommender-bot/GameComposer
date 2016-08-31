@@ -17,6 +17,7 @@ package de.mirkosertic.gameengine.gwt;
 
 import de.mirkosertic.gameengine.camera.CameraBehavior;
 import de.mirkosertic.gameengine.core.GameObjectInstance;
+import de.mirkosertic.gameengine.core.GameResource;
 import de.mirkosertic.gameengine.core.GameRuntime;
 import de.mirkosertic.gameengine.core.GameScene;
 import de.mirkosertic.gameengine.core.GestureDetector;
@@ -61,7 +62,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.TextResource;
 
-public class GWTWebGLGameView extends GenericAbstractGameView<GWTBitmapResource> {
+public class GWTWebGLGameView extends GenericAbstractGameView {
 
     interface Resource extends ClientBundle {
 
@@ -310,8 +311,9 @@ public class GWTWebGLGameView extends GenericAbstractGameView<GWTBitmapResource>
     }
 
     @Override
-    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, GWTBitmapResource aResource) {
-        sprite.render(aPositionOnScreen, aInstance.getOwnerGameObject().sizeProperty().get(), aInstance.rotationAngleProperty().get(), aResource);
+    protected void drawImage(GameObjectInstance aInstance, Position aPositionOnScreen, Position aCenterOffset, GameResource aResource) {
+        GWTBitmapResource theResource = (GWTBitmapResource) aResource;
+        sprite.render(aPositionOnScreen, aInstance.getOwnerGameObject().sizeProperty().get(), aInstance.rotationAngleProperty().get(), theResource);
     }
 
     @Override
