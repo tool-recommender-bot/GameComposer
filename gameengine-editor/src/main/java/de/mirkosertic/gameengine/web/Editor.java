@@ -17,6 +17,16 @@ package de.mirkosertic.gameengine.web;
 
 import de.mirkosertic.gameengine.core.GameObjectInstance;
 import de.mirkosertic.gameengine.core.GameScene;
+import de.mirkosertic.gameengine.web.electron.Dialog;
+import de.mirkosertic.gameengine.web.electron.DialogOptions;
+import de.mirkosertic.gameengine.web.electron.Electron;
+import de.mirkosertic.gameengine.web.electron.Menu;
+import de.mirkosertic.gameengine.web.electron.MenuItem;
+import de.mirkosertic.gameengine.web.electron.Remote;
+import de.mirkosertic.gameengine.web.electron.fs.FS;
+import de.mirkosertic.gameengine.web.electron.fs.Stats;
+import org.teavm.jso.JSBody;
+import org.teavm.jso.JSObject;
 import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.html.HTMLElement;
 
@@ -24,6 +34,30 @@ public class Editor {
 
     private static final Window window = Window.current();
     private static final HTML5Document document = (HTML5Document) window.getDocument();
+
+    @JSBody(params = "aValue", script = "return (typeof aValue !== 'undefined');")
+    public static native boolean isDefined(JSObject aValue);
+
+    public Editor() {
+        if (Electron.available()) {
+            Electron theElectron = Electron.require();
+            Remote theRemote = theElectron.getRemote();
+            FS theFilesystem = theRemote.require("fs");
+
+            Menu theApplicationMenu = Menu.createMenu(theRemote);
+
+            Menu theFileMenu = Menu.createMenu(theRemote);
+            MenuItem theOpen = MenuItem.createMenuItem(theRemote, "Open", () -> {
+                openLocalProject(theFilesystem, theRemote);
+            });
+            theFileMenu.append(theOpen);
+
+            MenuItem theFileItem = MenuItem.createMenuItem(theRemote, "File", theFileMenu);
+            theApplicationMenu.append(theFileItem);
+
+            Menu.setApplicationMenu(theRemote, theApplicationMenu);
+        }
+    }
 
     public void boot(EditorProject aProject) {
 
@@ -59,5 +93,32 @@ public class Editor {
         window.addEventListener("resize", evt -> theGameEditor.handleResize(), true);
 
         theObjectEditor.clear();
+    }
+
+    private void openLocalProject(FS aFilesystem, Remote aRemote) {
+        DialogOptions theOptions = DialogOptions.create();
+        theOptions.setTitle("Select a file!");
+        theOptions.setProperties(new String[] { "openFile", "openDirectory" });
+
+        // http://stackoverflow.com/questions/20619488/how-to-convert-local-file-path-to-a-file-url-safely-in-node-js
+        Dialog theDialog = aRemote.getDialog();
+
+        JSObject aPaths = theDialog.showOpenDialog(theOptions);
+        if (isDefined(aPaths) && aPaths != null) {
+            String[] theResults = (String[]) (Object) aPaths;
+            if (theResults.length == 1) {
+                Stats theStats = aFilesystem.statSync(theResults[0]);
+                if (theStats != null) {
+                    window.alert(
+                            theResults[0] + " isFile : " + theStats.isFile() + " isDirectory : " + theStats.isDirectory());
+                } else {
+                    window.alert("no fsstats for " + theResults[0]);
+                }
+            } else {
+                window.alert(theResults.length + "Files selected");
+            }
+        } else {
+            window.alert("No selected");
+        }
     }
 }

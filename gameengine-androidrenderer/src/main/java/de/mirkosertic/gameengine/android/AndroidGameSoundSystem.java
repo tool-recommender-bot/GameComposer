@@ -49,7 +49,7 @@ public class AndroidGameSoundSystem implements GameSoundSystem<AndroidStreamIden
     }
 
     private synchronized AndroidSoundIdentifier loadSound(ResourceName aResourceName) throws IOException {
-        AndroidSoundResource theSound = resourceCache.getResourceFor(aResourceName);
+        AndroidSoundResource theSound = (AndroidSoundResource) resourceCache.getResourceFor(aResourceName);
         AndroidSoundIdentifier theIdentifier = loadedSounds.get(theSound.resourceName);
         if (theIdentifier == null) {
             int theSoundID = soundPool.load(theSound.fileDescriptor, 1);

@@ -7,12 +7,12 @@ import java.util.HashMap;
 public class DummyKeyValueObjectCache extends HashMap<Object, Object> implements KeyValueObjectCache {
 
     @Override
-    public <T> T getObjectForKey(Object aKey) {
-        return (T) get(aKey);
+    public Object getObjectForKey(Object aKey) {
+        return get(aKey);
     }
 
     @Override
-    public <T> void setObjectForKey(Object aKey, T aValue) {
+    public void setObjectForKey(Object aKey, Object aValue) {
         put(aKey, aValue);
     }
 }

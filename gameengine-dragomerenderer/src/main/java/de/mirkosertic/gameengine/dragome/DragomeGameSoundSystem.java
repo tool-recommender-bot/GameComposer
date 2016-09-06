@@ -33,7 +33,7 @@ public class DragomeGameSoundSystem implements GameSoundSystem<DragomeSound> {
     @Override
     public DragomeSound play(ResourceName aResourceName) {
         try {
-            DragomeGameResource theResource = resourceCache.getResourceFor(aResourceName);
+            DragomeGameResource theResource = (DragomeGameResource) resourceCache.getResourceFor(aResourceName);
             if (theResource != null && theResource.getType() == GameResourceType.SOUND) {
                 ScriptHelper.put("sn", theResource.getName(), this);
                 ScriptHelper.evalNoResult("new Audio(sn).play()", this);

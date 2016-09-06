@@ -77,7 +77,7 @@ public class LuaJScriptEngine implements LUAScriptEngine {
     }
 
     private static LuaValue toLuaValue(Reflectable aObject, KeyValueObjectCache aCache) {
-        LuaTable theTable = aCache.getObjectForKey(aObject);
+        LuaTable theTable = (LuaTable) aCache.getObjectForKey(aObject);
         if (theTable == null) {
             theTable = new LuaTable();
             theTable.set("javaobject", LuaValue.userdataOf(aObject));
