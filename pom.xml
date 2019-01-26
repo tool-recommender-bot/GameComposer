@@ -162,7 +162,7 @@
     </dependencyManagement>
 
     <properties>
-        <teavm.version>0.5.1</teavm.version>
+        <teavm.version>0.6.0-dev-665</teavm.version>
         <bytecoder.version>0-SNAPSHOT</bytecoder.version>
     </properties>
 
